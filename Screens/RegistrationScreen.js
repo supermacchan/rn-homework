@@ -32,13 +32,15 @@ export const RegistrationScreen = () => {
                     </Pressable>
                     <Text style={styles.title}>Регистрация</Text>
                     {/* инпут для логина */}
-                    <TextInput style={styles.input} />
+                    <TextInput style={styles.input} placeholder='Логин' />
                     {/* инпут для емейла */}
-                    <TextInput style={styles.input} />
+                    <TextInput style={styles.input} placeholder='Адрес электронной почты' />
                     {/* инпут для пароля */}
-                    <TextInput style={styles.input} secureTextEntry={true} />
+                    <TextInput style={styles.input} placeholder='Пароль' secureTextEntry={true} />
                     {/* Кнопка показать / скрыть пароль */}
-                    <Button title='Показать' />
+                    <Pressable style={styles.showPass} >
+                        <Text>Показать</Text>
+                    </Pressable>
                     {/* Кнопка регистрации */}
                     <TouchableOpacity activeOpacity={0.8} style={styles.button}>
                         <Text style={styles.btnTitle}>Зарегистрироваться</Text>
@@ -91,16 +93,16 @@ const styles = StyleSheet.create({
         marginBottom: 33,
         fontSize: 30,
         color: '#000',
+        textAlign: 'center',
     },
     input: {
-        marginTop: 10,
-        borderWidth: 1,
-        borderColor: '#f0f8ff',
-        backgroundColor: '#ffe4e1',
-        height: 40,
-        borderRadius: 6,
-        color: "#000",
-        fontSize: 18,
+        marginBottom: 16,
+        padding: 16,
+        backgroundColor: '#E8E8E8',
+        height: 50,
+        borderRadius: 8,
+        color: "#BDBDBD",
+        fontSize: 16,
     },
     button: {
         ...Platform.select({
