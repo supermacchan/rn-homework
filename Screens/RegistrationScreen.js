@@ -46,7 +46,9 @@ export const RegistrationScreen = () => {
                         <Text style={styles.btnTitle}>Зарегистрироваться</Text>
                     </TouchableOpacity>
                     {/* ссылка перехода на страницу логина */}
-                    <Button title='Уже есть аккаунт? Войти' />
+                    <Pressable style={styles.loginNav} >
+                        <Text>Уже есть аккаунт? Войти</Text>
+                    </Pressable>
                 </View>
             </ImageBackground>
         </View>
@@ -65,6 +67,7 @@ const styles = StyleSheet.create({
     },
     form: {
         paddingTop: 32,
+        paddingBottom: 45,
         paddingHorizontal: 16,
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
@@ -123,6 +126,7 @@ const styles = StyleSheet.create({
         height: 40,
         borderRadius: 100,
         marginTop: 27,
+        marginBottom: 16,
         padding: 16,
         justifyContent: 'center',
         alignItems: 'center',
@@ -131,4 +135,7 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 16,
     },
+    loginNav: {
+        textAlign: 'center',
+    }
 })
