@@ -8,8 +8,16 @@ export default function App() {
         style={styles.image}
         source={require("./assets/test-background.jpg")}
       >
-        <Text style={styles.text}>Let's begin!</Text>
-        <TextInput style={styles.input} textAlign={'center'} />
+        <View style={styles.form}>
+          <View>
+            <Text style={styles.inputTitle}>Email address</Text>
+            <TextInput style={styles.input} textAlign='center' />
+          </View>
+          <View>
+            <Text style={styles.inputTitle}>Password</Text>
+            <TextInput style={styles.input} textAlign='center' />
+          </View>
+        </View>
       </ImageBackground>
       <StatusBar style="auto" />
     </View>
@@ -21,22 +29,24 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  text: {
-    color: '#fff',
-    fontSize: 30,
-    textAlign: 'center',
-  },
   image: {
     flex: 1,
     resizeMode: "cover",
     justifyContent: 'center',
   },
+  form: {
+    marginHorizontal: 40,
+  },
+  inputTitle: {
+    color: '#fff',
+    fontSize: 15,
+    textTransform: 'uppercase',
+  },
   input: {
     borderWidth: 1,
     borderColor: '#f0f8ff',
-    marginHorizontal: 40,
     height: 40,
     borderRadius: 6,
     color: "#fff",
-  }
+  },
 });
