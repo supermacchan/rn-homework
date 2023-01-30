@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ImageBackground, TextInput } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, TextInput, TouchableOpacity } from 'react-native';
 
 export default function App() {
   return (
@@ -17,6 +17,9 @@ export default function App() {
             <Text style={styles.inputTitle}>Password</Text>
             <TextInput style={styles.input} textAlign='center' secureTextEntry={true} />
           </View>
+          <TouchableOpacity activeOpacity={0.8} style={styles.button}>
+            <Text style={styles.btnTitle}>Sign In</Text>
+          </TouchableOpacity>
         </View>
       </ImageBackground>
       <StatusBar style="auto" />
@@ -50,5 +53,19 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     color: "#fff",
     fontSize: 18,
+  },
+  button: {
+    backgroundColor: '#fffafa',
+    height: 40,
+    borderRadius: 6,
+    marginTop: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 90,
+  },
+  btnTitle: {
+    color: '#191970',
+    fontSize: 15,
+    textTransform: 'uppercase',
   },
 });
