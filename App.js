@@ -1,7 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ImageBackground, TextInput, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  TextInput,
+  TouchableOpacity, 
+  Platform
+} from 'react-native';
 
 export default function App() {
+  console.log(Platform.OS);
   return (
     <View style={styles.container}>
        <ImageBackground
