@@ -6,8 +6,10 @@ import {
   Text,
   TextInput,
   TouchableOpacity, 
+  Pressable,
   Platform
 } from 'react-native';
+import { AntDesign } from "@expo/vector-icons";
 
 export const RegistrationScreen = () => {
     return (
@@ -19,11 +21,15 @@ export const RegistrationScreen = () => {
                 {/* Контейнер формы регистрации */}
                 <View style={styles.form}>
                     {/* Контейнер для аватарки */}
-                    <View>
+                    <View style={styles.avatar}>
                         {/* <Image /> */}
                     </View>
                     {/* Кнопка добавить / удалить аватарку */}
-                    <Button title='x' />
+                    <Pressable style={styles.avatarBtn} >
+                        <Text>
+                            <AntDesign name="close" size={24} color="#BDBDBD" />
+                        </Text>
+                    </Pressable>
                     <Text style={styles.title}>Регистрация</Text>
                     {/* инпут для логина */}
                     <TextInput style={styles.input} />
@@ -53,13 +59,33 @@ const styles = StyleSheet.create({
     background: {
         flex: 1,
         resizeMode: "cover",
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
     },
     form: {
-        marginHorizontal: 40,
+        position: 'relative',
+        paddingTop: 32,
+        paddingHorizontal: 16,
+        borderTopLeftRadius: 25,
+        borderTopRightRadius: 25,
         backgroundColor: '#fff',
     },
+    avatar: {
+        marginTop: -92,
+        marginBottom: 32,
+        alignSelf: 'center',
+        width: 120,
+        height: 120,
+        backgroundColor: '#F6F6F6',
+        borderRadius: 16,
+    },
+    avatarBtn: {
+        width: 25,
+        height: 25,
+        borderRadius: "50%",
+
+    },
     title: {
+        marginBottom: 33,
         fontSize: 30,
         color: '#000',
     },
