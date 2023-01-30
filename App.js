@@ -13,9 +13,9 @@ export default function App() {
             <Text style={styles.inputTitle}>Email address</Text>
             <TextInput style={styles.input} textAlign='center' />
           </View>
-          <View>
+          <View style={{marginTop: 20}}>
             <Text style={styles.inputTitle}>Password</Text>
-            <TextInput style={styles.input} textAlign='center' />
+            <TextInput style={styles.input} textAlign='center' secureTextEntry={true} />
           </View>
         </View>
       </ImageBackground>
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 15,
     textTransform: 'uppercase',
+    marginBottom: 10,
   },
   input: {
     borderWidth: 1,
@@ -48,5 +49,6 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 6,
     color: "#fff",
+    fontSize: 18,
   },
 });
