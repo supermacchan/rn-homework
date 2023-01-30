@@ -137,5 +137,7 @@ const styles = StyleSheet.create({
     },
     loginNav: {
         textAlign: 'center',
+        color: '#1B4371',
+        fontSize: 16,
     }
 })
