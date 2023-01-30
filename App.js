@@ -64,7 +64,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   button: {
-    backgroundColor: '#fffafa',
+    ...Platform.select({
+      ios: {
+        backgroundColor: 'transparent',
+        borderColor: '#fffafa',
+      },
+      android: {
+        backgroundColor: '#fffafa',
+        borderColor: 'transparent',
+      }
+    }),
     height: 40,
     borderRadius: 6,
     marginTop: 40,
