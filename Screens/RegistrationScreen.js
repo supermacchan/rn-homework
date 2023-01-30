@@ -105,28 +105,30 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     button: {
-        ...Platform.select({
-        ios: {
-            backgroundColor: '#ffa500',
-            borderColor: '#fffafa',
-        },
-        android: {
-            backgroundColor: '#ffa500',
-            borderColor: 'transparent',
-            },
-        default: {
-            backgroundColor: '#ffa500',
-            borderColor: 'transparent',
-        }
-        }),
+        // ...Platform.select({
+        // ios: {
+        //     backgroundColor: '#ffa500',
+        //     borderColor: '#fffafa',
+        // },
+        // android: {
+        //     backgroundColor: '#ffa500',
+        //     borderColor: 'transparent',
+        //     },
+        // default: {
+        //     backgroundColor: '#ffa500',
+        //     borderColor: 'transparent',
+        // }
+        // }),
+        backgroundColor: '#FF6C00',
         height: 40,
-        borderRadius: 6,
-        marginTop: 40,
+        borderRadius: 100,
+        marginTop: 27,
+        padding: 16,
         justifyContent: 'center',
         alignItems: 'center',
     },
     btnTitle: {
-        color: '#191970',
-        fontSize: 15,
+        color: '#fff',
+        fontSize: 16,
     },
 })
