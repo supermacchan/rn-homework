@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
     },
     form: {
-        position: 'relative',
         paddingTop: 32,
         paddingHorizontal: 16,
         borderTopLeftRadius: 25,
@@ -70,6 +69,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     avatar: {
+        position: 'relative',
         marginTop: -92,
         marginBottom: 32,
         alignSelf: 'center',
@@ -79,6 +79,9 @@ const styles = StyleSheet.create({
         borderRadius: 16,
     },
     avatarBtn: {
+        // временное позиционирование
+        position: 'absolute',
+        left: '65%',
         width: 25,
         height: 25,
         borderRadius: "50%",
