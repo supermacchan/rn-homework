@@ -8,12 +8,14 @@ import {
   TouchableOpacity, 
   Platform
 } from 'react-native';
+import { RegistrationScreen } from './Screens/RegistrationScreen';
 
 export default function App() {
   console.log(Platform.OS);
   return (
     <View style={styles.container}>
-       <ImageBackground
+      <RegistrationScreen />
+       {/* <ImageBackground
         style={styles.image}
         source={require("./assets/test-background.jpg")}
       >
@@ -30,7 +32,7 @@ export default function App() {
             <Text style={styles.btnTitle}>Sign In</Text>
           </TouchableOpacity>
         </View>
-      </ImageBackground>
+      </ImageBackground> */}
       <StatusBar style="auto" />
     </View>
   );
