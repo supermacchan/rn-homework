@@ -41,11 +41,27 @@ export const RegistrationScreen = () => {
                     )}
                     <Text style={styles.title}>Регистрация</Text>
                     {/* инпут для логина */}
-                    <TextInput style={styles.input} placeholder='Логин' />
+                    <TextInput
+                        style={styles.input}
+                        selectionColor='#FF6C00'
+                        placeholder='Логин'
+                        placeholderTextColor='#BDBDBD'
+                    />
                     {/* инпут для емейла */}
-                    <TextInput style={styles.input} placeholder='Адрес электронной почты' />
+                    <TextInput
+                        style={styles.input}
+                        selectionColor='#FF6C00'
+                        placeholder='Адрес электронной почты'
+                        placeholderTextColor='#BDBDBD'
+                    />
                     {/* инпут для пароля */}
-                    <TextInput style={styles.input} placeholder='Пароль' secureTextEntry={true} />
+                    <TextInput
+                        style={styles.input}
+                        selectionColor='#FF6C00'
+                        placeholder='Пароль'
+                        secureTextEntry={true}
+                        placeholderTextColor='#BDBDBD'
+                    />
                     {/* Кнопка показать / скрыть пароль */}
                     <Pressable style={styles.showPass} >
                         <Text style={styles.showPassText}>Показать</Text>
@@ -124,7 +140,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#E8E8E8',
         height: 50,
         borderRadius: 8,
-        color: "#BDBDBD",
+        color: "#212121",
         fontSize: 16,
     },
     showPass: {
