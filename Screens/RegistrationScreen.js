@@ -7,42 +7,22 @@ import {
   TouchableOpacity, 
   Pressable,
 } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AntDesign } from "@expo/vector-icons";
 
 export const RegistrationScreen = () => {
     const [avatar, setAvatar] = useState(null);
-    const [loginIsFocused, setLoginIsFocused] = useState(false);
-    const [emailIsFocused, setEmailIsFocused] = useState(false);
-    const [passIsFocused, setPassIsFocused] = useState(false);
+    const [inputName, setInputName] = useState('');
+    const [isFocused, setIsFocused] = useState(false);
+
+    useEffect(() => {
+        setIsFocused(true);
+    }, [inputName])
 
     const handleInputFocus = (event) => {
-        let name = event.currentTarget.placeholder;
-        switch (name) {
-            case 'Логин':
-                setLoginIsFocused(true);
-                setEmailIsFocused(false);
-                setPassIsFocused(false);
-                console.log('login in focus');
-                break;
-            case 'Адрес электронной почты':
-                setLoginIsFocused(false);
-                setEmailIsFocused(true);
-                setPassIsFocused(false);
-                console.log('email in focus');
-                break;
-            case 'Пароль':
-                setLoginIsFocused(false);
-                setEmailIsFocused(false);
-                setPassIsFocused(true);
-                console.log('pass in focus');
-                break;
-            default: 
-                setLoginIsFocused(false);
-                setEmailIsFocused(false);
-                setPassIsFocused(false);
-        }
-    }
+        let input = event.currentTarget.placeholder;
+        setInputName(input);
+    };
 
     return (
         <View style={styles.container}>
@@ -73,7 +53,7 @@ export const RegistrationScreen = () => {
                     <Text style={styles.title}>Регистрация</Text>
                     {/* инпут для логина */}
                     <TextInput
-                        style={loginIsFocused
+                        style={(inputName === 'Логин' && isFocused)
                             ? { ...styles.input }
                             : { ...styles.inputFocused }}
                         placeholder='Логин'
@@ -82,7 +62,7 @@ export const RegistrationScreen = () => {
                     />
                     {/* инпут для емейла */}
                     <TextInput
-                        style={emailIsFocused
+                        style={(inputName === 'Адрес электронной почты' && isFocused)
                             ? { ...styles.input }
                             : { ...styles.inputFocused }}
                         placeholder='Адрес электронной почты'
@@ -91,7 +71,7 @@ export const RegistrationScreen = () => {
                     />
                     {/* инпут для пароля */}
                     <TextInput
-                        style={passIsFocused
+                        style={(inputName === 'Пароль' && isFocused)
                             ? { ...styles.input }
                             : { ...styles.inputFocused }}
                         placeholder='Пароль'
