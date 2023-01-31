@@ -7,7 +7,6 @@ import {
   TouchableOpacity, 
   Pressable,
 } from 'react-native';
-import { AntDesign } from "@expo/vector-icons";
 
 export const LoginScreen = () => {
     return (
