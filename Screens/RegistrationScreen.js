@@ -7,9 +7,12 @@ import {
   TouchableOpacity, 
   Pressable,
 } from 'react-native';
+import { useState } from 'react';
 import { AntDesign } from "@expo/vector-icons";
 
 export const RegistrationScreen = () => {
+    const [avatar, setAvatar] = useState(null);
+
     return (
         <View style={styles.container}>
             <ImageBackground
@@ -23,12 +26,19 @@ export const RegistrationScreen = () => {
                         {/* <Image /> */}
                     </View>
                     {/* Кнопка добавить / удалить аватарку */}
-                    <Pressable style={styles.avatarBtn} >
-                        <Text style={styles.addAvatar}>
-                            <AntDesign name="plus" size={20} color="#FF6C00" />
-                            {/* <AntDesign name="close" size={20} color="#BDBDBD" style={styles.icon} /> */}
-                        </Text>
-                    </Pressable>
+                    {!avatar ? (
+                        <Pressable style={styles.avatarBtn} >
+                            <Text style={styles.addAvatar}>
+                                <AntDesign name="plus" size={20} color="#FF6C00" />
+                            </Text>
+                        </Pressable>
+                    ) : (
+                        <Pressable style={styles.avatarBtn} >
+                            <Text style={styles.delAvatar}>
+                                <AntDesign name="close" size={20} color="#BDBDBD" />
+                            </Text>
+                        </Pressable>
+                    )}
                     <Text style={styles.title}>Регистрация</Text>
                     {/* инпут для логина */}
                     <TextInput style={styles.input} placeholder='Логин' />
@@ -89,14 +99,18 @@ const styles = StyleSheet.create({
     },
     addAvatar: {
         backgroundColor: '#fff',
-        borderRadius: "50%",
+        borderRadius: 25,
         borderWidth: 1,
         borderColor: '#FF6C00',
         textAlign: 'center',
     },
-    // icon: {
-    //     color: '#FF6C00',
-    // },
+    delAvatar: {
+        backgroundColor: '#fff',
+        borderRadius: 25,
+        borderWidth: 1,
+        borderColor: '#BDBDBD',
+        textAlign: 'center',
+    },
     title: {
         marginBottom: 33,
         marginTop: 46,
