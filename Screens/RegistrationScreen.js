@@ -17,7 +17,7 @@ export const RegistrationScreen = () => {
     const [passIsFocused, setPassIsFocused] = useState(false);
 
     const handleInputFocus = (event) => {
-        let name = event.target.placeholder;
+        let name = event.currentTarget.placeholder;
         switch (name) {
             case 'Логин':
                 setLoginIsFocused(true);
