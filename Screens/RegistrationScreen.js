@@ -25,7 +25,8 @@ export const RegistrationScreen = () => {
                     {/* Кнопка добавить / удалить аватарку */}
                     <Pressable style={styles.avatarBtn} >
                         <Text style={styles.addAvatar}>
-                            <AntDesign name="close" size={20} color="#BDBDBD" style={styles.icon} />
+                            <AntDesign name="plus" size={20} color="#FF6C00" />
+                            {/* <AntDesign name="close" size={20} color="#BDBDBD" style={styles.icon} /> */}
                         </Text>
                     </Pressable>
                     <Text style={styles.title}>Регистрация</Text>
@@ -93,9 +94,9 @@ const styles = StyleSheet.create({
         borderColor: '#FF6C00',
         textAlign: 'center',
     },
-    icon: {
-        color: '#FF6C00',
-    },
+    // icon: {
+    //     color: '#FF6C00',
+    // },
     title: {
         marginBottom: 33,
         marginTop: 46,

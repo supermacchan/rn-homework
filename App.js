@@ -4,15 +4,15 @@ import {
   View,
   Platform
 } from 'react-native';
-// import { RegistrationScreen } from './Screens/RegistrationScreen';
+import { RegistrationScreen } from './Screens/RegistrationScreen';
 import { LoginScreen } from './Screens/LoginScreen';
 
 export default function App() {
   console.log(Platform.OS);
   return (
     <View style={styles.container}>
-      {/* <RegistrationScreen /> */}
-      <LoginScreen />
+      <RegistrationScreen />
+      {/* <LoginScreen /> */}
 
       <StatusBar style="auto" />
     </View>
