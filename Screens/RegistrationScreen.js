@@ -37,6 +37,10 @@ export const RegistrationScreen = () => {
                 setPassIsFocused(true);
                 console.log('pass in focus');
                 break;
+            default: 
+                setLoginIsFocused(false);
+                setEmailIsFocused(false);
+                setPassIsFocused(false);
         }
     }
 
@@ -69,21 +73,27 @@ export const RegistrationScreen = () => {
                     <Text style={styles.title}>Регистрация</Text>
                     {/* инпут для логина */}
                     <TextInput
-                        style={styles.input}
+                        style={loginIsFocused
+                            ? { ...styles.input }
+                            : { ...styles.inputFocused }}
                         placeholder='Логин'
                         placeholderTextColor='#BDBDBD'
                         onFocus={handleInputFocus}
                     />
                     {/* инпут для емейла */}
                     <TextInput
-                        style={styles.input}
+                        style={emailIsFocused
+                            ? { ...styles.input }
+                            : { ...styles.inputFocused }}
                         placeholder='Адрес электронной почты'
                         placeholderTextColor='#BDBDBD'
                         onFocus={handleInputFocus}
                     />
                     {/* инпут для пароля */}
                     <TextInput
-                        style={styles.input}
+                        style={passIsFocused
+                            ? { ...styles.input }
+                            : { ...styles.inputFocused }}
                         placeholder='Пароль'
                         secureTextEntry={true}
                         placeholderTextColor='#BDBDBD'
@@ -167,6 +177,17 @@ const styles = StyleSheet.create({
         backgroundColor: '#E8E8E8',
         height: 50,
         borderRadius: 8,
+        color: "#212121",
+        fontSize: 16,
+    },
+    inputFocused: {
+        marginBottom: 16,
+        padding: 16,
+        backgroundColor: '#E8E8E8',
+        height: 50,
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: '#FF6C00',
         color: "#212121",
         fontSize: 16,
     },
