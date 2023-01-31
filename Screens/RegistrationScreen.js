@@ -178,6 +178,8 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius: 8,
         color: "#212121",
+        borderWidth: 1,
+        borderColor: 'transparent',
         fontSize: 16,
     },
     inputFocused: {
