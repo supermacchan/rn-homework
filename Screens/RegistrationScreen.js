@@ -12,6 +12,33 @@ import { AntDesign } from "@expo/vector-icons";
 
 export const RegistrationScreen = () => {
     const [avatar, setAvatar] = useState(null);
+    const [loginIsFocused, setLoginIsFocused] = useState(false);
+    const [emailIsFocused, setEmailIsFocused] = useState(false);
+    const [passIsFocused, setPassIsFocused] = useState(false);
+
+    const handleInputFocus = (event) => {
+        let name = event.target.placeholder;
+        switch (name) {
+            case 'Логин':
+                setLoginIsFocused(true);
+                setEmailIsFocused(false);
+                setPassIsFocused(false);
+                console.log('login in focus');
+                break;
+            case 'Адрес электронной почты':
+                setLoginIsFocused(false);
+                setEmailIsFocused(true);
+                setPassIsFocused(false);
+                console.log('email in focus');
+                break;
+            case 'Пароль':
+                setLoginIsFocused(false);
+                setEmailIsFocused(false);
+                setPassIsFocused(true);
+                console.log('pass in focus');
+                break;
+        }
+    }
 
     return (
         <View style={styles.container}>
@@ -43,24 +70,24 @@ export const RegistrationScreen = () => {
                     {/* инпут для логина */}
                     <TextInput
                         style={styles.input}
-                        selectionColor='#FF6C00'
                         placeholder='Логин'
                         placeholderTextColor='#BDBDBD'
+                        onFocus={handleInputFocus}
                     />
                     {/* инпут для емейла */}
                     <TextInput
                         style={styles.input}
-                        selectionColor='#FF6C00'
                         placeholder='Адрес электронной почты'
                         placeholderTextColor='#BDBDBD'
+                        onFocus={handleInputFocus}
                     />
                     {/* инпут для пароля */}
                     <TextInput
                         style={styles.input}
-                        selectionColor='#FF6C00'
                         placeholder='Пароль'
                         secureTextEntry={true}
                         placeholderTextColor='#BDBDBD'
+                        onFocus={handleInputFocus}
                     />
                     {/* Кнопка показать / скрыть пароль */}
                     <Pressable style={styles.showPass} >
@@ -154,7 +181,6 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: '#FF6C00',
-        height: 40,
         borderRadius: 100,
         marginTop: 59,
         marginBottom: 16,

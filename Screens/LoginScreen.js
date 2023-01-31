@@ -21,14 +21,12 @@ export const LoginScreen = () => {
                     {/* инпут для емейла */}
                    <TextInput
                         style={styles.input}
-                        selectionColor='#FF6C00'
                         placeholder='Адрес электронной почты'
                         placeholderTextColor='#BDBDBD'
                     />
                     {/* инпут для пароля */}
                     <TextInput
                         style={styles.input}
-                        selectionColor='#FF6C00'
                         placeholder='Пароль'
                         secureTextEntry={true}
                         placeholderTextColor='#BDBDBD'
@@ -96,7 +94,6 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: '#FF6C00',
-        height: 40,
         borderRadius: 100,
         marginTop: 59,
         marginBottom: 16,
@@ -114,5 +111,6 @@ const styles = StyleSheet.create({
     authNavText: {
         color: '#1B4371',
         fontSize: 16,
+        alignSelf: 'center'
     }
 })
