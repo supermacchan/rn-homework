@@ -2,12 +2,10 @@ import {
   StyleSheet,
   View,
   ImageBackground,
-  Button,
   Text,
   TextInput,
   TouchableOpacity, 
   Pressable,
-  Platform
 } from 'react-native';
 import { AntDesign } from "@expo/vector-icons";
 
@@ -26,8 +24,8 @@ export const RegistrationScreen = () => {
                     </View>
                     {/* Кнопка добавить / удалить аватарку */}
                     <Pressable style={styles.avatarBtn} >
-                        <Text>
-                            <AntDesign name="close" size={24} color="#BDBDBD" />
+                        <Text style={styles.addAvatar}>
+                            <AntDesign name="close" size={20} color="#BDBDBD" style={styles.icon} />
                         </Text>
                     </Pressable>
                     <Text style={styles.title}>Регистрация</Text>
@@ -39,7 +37,7 @@ export const RegistrationScreen = () => {
                     <TextInput style={styles.input} placeholder='Пароль' secureTextEntry={true} />
                     {/* Кнопка показать / скрыть пароль */}
                     <Pressable style={styles.showPass} >
-                        <Text>Показать</Text>
+                        <Text style={styles.showPassText}>Показать</Text>
                     </Pressable>
                     {/* Кнопка регистрации */}
                     <TouchableOpacity activeOpacity={0.8} style={styles.button}>
@@ -47,7 +45,7 @@ export const RegistrationScreen = () => {
                     </TouchableOpacity>
                     {/* ссылка перехода на страницу логина */}
                     <Pressable style={styles.loginNav} >
-                        <Text>Уже есть аккаунт? Войти</Text>
+                        <Text style={styles.loginNavText}>Уже есть аккаунт? Войти</Text>
                     </Pressable>
                 </View>
             </ImageBackground>
@@ -74,9 +72,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     avatar: {
-        position: 'relative',
         marginTop: -92,
-        marginBottom: 32,
         alignSelf: 'center',
         width: 120,
         height: 120,
@@ -84,16 +80,25 @@ const styles = StyleSheet.create({
         borderRadius: 16,
     },
     avatarBtn: {
-        // временное позиционирование
-        position: 'absolute',
-        left: '65%',
         width: 25,
         height: 25,
+        alignSelf: 'center',
+        marginTop: -39,
+        marginRight: -119.5,
+    },
+    addAvatar: {
+        backgroundColor: '#fff',
         borderRadius: "50%",
-
+        borderWidth: 1,
+        borderColor: '#FF6C00',
+        textAlign: 'center',
+    },
+    icon: {
+        color: '#FF6C00',
     },
     title: {
         marginBottom: 33,
+        marginTop: 46,
         fontSize: 30,
         color: '#000',
         textAlign: 'center',
@@ -107,25 +112,20 @@ const styles = StyleSheet.create({
         color: "#BDBDBD",
         fontSize: 16,
     },
+    showPass: {
+        alignSelf: 'flex-end',
+        marginTop: -50,
+        marginRight: 16,
+    },
+    showPassText: {
+        fontSize: 16,
+        color: '#1B4371',
+    },
     button: {
-        // ...Platform.select({
-        // ios: {
-        //     backgroundColor: '#ffa500',
-        //     borderColor: '#fffafa',
-        // },
-        // android: {
-        //     backgroundColor: '#ffa500',
-        //     borderColor: 'transparent',
-        //     },
-        // default: {
-        //     backgroundColor: '#ffa500',
-        //     borderColor: 'transparent',
-        // }
-        // }),
         backgroundColor: '#FF6C00',
         height: 40,
         borderRadius: 100,
-        marginTop: 27,
+        marginTop: 59,
         marginBottom: 16,
         padding: 16,
         justifyContent: 'center',
@@ -137,6 +137,8 @@ const styles = StyleSheet.create({
     },
     loginNav: {
         textAlign: 'center',
+    },
+    loginNavText: {
         color: '#1B4371',
         fontSize: 16,
     }
