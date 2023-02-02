@@ -28,57 +28,61 @@ export const LoginScreen = () => {
                 style={styles.background}
                 source={require("../assets/background.jpg")}
             >
-                {/* Контейнер формы регистрации */}
-                <View style={styles.form}>
-                    <Text style={styles.title}>Войти</Text>
-                    {/* инпут для емейла */}
-                   <TextInput
-                        style={{
-                            ...styles.input,
-                            backgroundColor: isEmailFocused ? '#fff' : '#E8E8E8',
-                            borderColor: isEmailFocused ? '#FF6C00' : 'transparent'
-                        }}
-                        placeholder='Адрес электронной почты'
-                        placeholderTextColor='#BDBDBD'
-                        onFocus={() => { setIsEmailFocused(true) }}
-                        onBlur={() => { setIsEmailFocused(false) }}
-                        onChangeText={text => handleSetEmail(text)}
-                        value={email}
-                    />
-                    {/* инпут для пароля */}
+                <KeyboardAvoidingView
+                    behavior={Platform.OS == 'ios' ? 'padding' : ''}
+                >
+                    {/* Контейнер формы регистрации */}
+                    <View style={styles.form}>
+                        <Text style={styles.title}>Войти</Text>
+                        {/* инпут для емейла */}
                     <TextInput
-                        style={{
-                            ...styles.input,
-                            backgroundColor: isPassFocused ? '#fff' : '#E8E8E8',
-                            borderColor: isPassFocused ? '#FF6C00' : 'transparent'
-                        }}
-                        placeholder='Пароль'
-                        secureTextEntry={!isPassShown}
-                        placeholderTextColor='#BDBDBD'
-                        onFocus={() => { setIsPassFocused(true) }}
-                        onBlur={() => { setIsPassFocused(false) }}
-                        onChangeText={text => handleSetPassword(text)}
-                        value={password}
-                    />
-                    {/* Кнопка показать / скрыть пароль */}
-                    <Pressable
-                        style={styles.showPass}
-                        onPress={() => { setIsPassShown(prevState => !prevState) }}
-                    >
-                        {isPassShown
-                            ? <Text style={styles.showPassText}>Скрыть</Text>
-                            : <Text style={styles.showPassText}>Показать</Text>
-                        } 
-                    </Pressable>
-                    {/* Кнопка регистрации */}
-                    <TouchableOpacity activeOpacity={0.8} style={styles.button}>
-                        <Text style={styles.btnTitle}>Войти</Text>
-                    </TouchableOpacity>
-                    {/* ссылка перехода на страницу логина */}
-                    <Pressable style={styles.authNav} >
-                        <Text style={styles.authNavText}>Нет аккаунта? Зарегистрироваться</Text>
-                    </Pressable>
-                </View>
+                            style={{
+                                ...styles.input,
+                                backgroundColor: isEmailFocused ? '#fff' : '#E8E8E8',
+                                borderColor: isEmailFocused ? '#FF6C00' : 'transparent'
+                            }}
+                            placeholder='Адрес электронной почты'
+                            placeholderTextColor='#BDBDBD'
+                            onFocus={() => { setIsEmailFocused(true) }}
+                            onBlur={() => { setIsEmailFocused(false) }}
+                            onChangeText={text => handleSetEmail(text)}
+                            value={email}
+                        />
+                        {/* инпут для пароля */}
+                        <TextInput
+                            style={{
+                                ...styles.input,
+                                backgroundColor: isPassFocused ? '#fff' : '#E8E8E8',
+                                borderColor: isPassFocused ? '#FF6C00' : 'transparent'
+                            }}
+                            placeholder='Пароль'
+                            secureTextEntry={!isPassShown}
+                            placeholderTextColor='#BDBDBD'
+                            onFocus={() => { setIsPassFocused(true) }}
+                            onBlur={() => { setIsPassFocused(false) }}
+                            onChangeText={text => handleSetPassword(text)}
+                            value={password}
+                        />
+                        {/* Кнопка показать / скрыть пароль */}
+                        <Pressable
+                            style={styles.showPass}
+                            onPress={() => { setIsPassShown(prevState => !prevState) }}
+                        >
+                            {isPassShown
+                                ? <Text style={styles.showPassText}>Скрыть</Text>
+                                : <Text style={styles.showPassText}>Показать</Text>
+                            } 
+                        </Pressable>
+                        {/* Кнопка регистрации */}
+                        <TouchableOpacity activeOpacity={0.8} style={styles.button}>
+                            <Text style={styles.btnTitle}>Войти</Text>
+                        </TouchableOpacity>
+                        {/* ссылка перехода на страницу логина */}
+                        <Pressable style={styles.authNav} >
+                            <Text style={styles.authNavText}>Нет аккаунта? Зарегистрироваться</Text>
+                        </Pressable>
+                    </View>
+                </KeyboardAvoidingView>
             </ImageBackground>
         </View>
     );
