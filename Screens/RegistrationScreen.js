@@ -1,13 +1,14 @@
 import {
-  StyleSheet,
-  View,
-  ImageBackground,
-  Text,
-  TextInput,
-  TouchableOpacity, 
-  Pressable,
-  KeyboardAvoidingView,
-  Platform,
+    StyleSheet,
+    View,
+    ImageBackground,
+    Text,
+    TextInput,
+    TouchableOpacity, 
+    Pressable,
+    KeyboardAvoidingView,
+    Platform,
+    Keyboard,
 } from 'react-native';
 import { useState } from 'react';
 import { AntDesign } from "@expo/vector-icons";
@@ -26,6 +27,11 @@ export const RegistrationScreen = () => {
     const handleSetLogin = text => setLogin(text);
     const handleSetEmail = text => setEmail(text);
     const handleSetPassword = text => setPassword(text);
+
+    const hideKeyboard = () => {
+        setIsKeyboardShown(false);
+        Keyboard.dismiss();
+    }
 
     return (
         <View style={styles.container}>
@@ -127,7 +133,7 @@ export const RegistrationScreen = () => {
                         <TouchableOpacity
                             activeOpacity={0.8}
                             style={styles.button}
-                            onPress={() => {setIsKeyboardShown(false)}}
+                            onPress={hideKeyboard}
                         >
                             <Text style={styles.btnTitle}>Зарегистрироваться</Text>
                         </TouchableOpacity>
