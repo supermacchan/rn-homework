@@ -105,7 +105,10 @@ export const RegistrationScreen = () => {
                             style={styles.showPass}
                             onPress={() => { setIsPassShown(prevState => !prevState) }}
                         >
-                            <Text style={styles.showPassText}>Показать</Text>
+                            {isPassShown
+                                ? <Text style={styles.showPassText}>Скрыть</Text>
+                                : <Text style={styles.showPassText}>Показать</Text>
+                            }   
                         </Pressable>
                         {/* Кнопка регистрации */}
                         <TouchableOpacity activeOpacity={0.8} style={styles.button}>

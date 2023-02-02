@@ -17,6 +17,7 @@ export const LoginScreen = () => {
     const [isEmailFocused, setIsEmailFocused] = useState(false);
     const [isPassFocused, setIsPassFocused] = useState(false);
     const [isKeyboardShown, setIsKeyboardShown] = useState(false);
+    const [isPassShown, setIsPassShown] = useState(false);
 
     const handleSetEmail = text => setEmail(text);
     const handleSetPassword = text => setPassword(text);
@@ -52,7 +53,7 @@ export const LoginScreen = () => {
                             borderColor: isPassFocused ? '#FF6C00' : 'transparent'
                         }}
                         placeholder='Пароль'
-                        secureTextEntry={true}
+                        secureTextEntry={!isPassShown}
                         placeholderTextColor='#BDBDBD'
                         onFocus={() => { setIsPassFocused(true) }}
                         onBlur={() => { setIsPassFocused(false) }}
@@ -60,8 +61,14 @@ export const LoginScreen = () => {
                         value={password}
                     />
                     {/* Кнопка показать / скрыть пароль */}
-                    <Pressable style={styles.showPass} >
-                        <Text style={styles.showPassText}>Показать</Text>
+                    <Pressable
+                        style={styles.showPass}
+                        onPress={() => { setIsPassShown(prevState => !prevState) }}
+                    >
+                        {isPassShown
+                            ? <Text style={styles.showPassText}>Скрыть</Text>
+                            : <Text style={styles.showPassText}>Показать</Text>
+                        } 
                     </Pressable>
                     {/* Кнопка регистрации */}
                     <TouchableOpacity activeOpacity={0.8} style={styles.button}>
