@@ -37,7 +37,11 @@ export const RegistrationScreen = () => {
                     behavior={Platform.OS == 'ios' ? 'padding' : ''}
                 >
                     {/* Контейнер формы регистрации */}
-                    <View style={styles.form}>
+                    <View style={{
+                        ...styles.form,
+                        paddingBottom: isKeyboardShown ? 0 : 45,
+                        marginBottom: isKeyboardShown ? -20 : 0,
+                    }}>
                         {/* Контейнер для аватарки */}
                         <View style={styles.avatar}>
                             {/* <Image /> */}
@@ -66,7 +70,10 @@ export const RegistrationScreen = () => {
                             }}
                             placeholder='Логин'
                             placeholderTextColor='#BDBDBD'
-                            onFocus={() => { setIsLoginFocused(true) }}
+                            onFocus={() => {
+                                setIsLoginFocused(true);
+                                setIsKeyboardShown(true);
+                            }}
                             onBlur={() => { setIsLoginFocused(false) }}
                             onChangeText={text => handleSetLogin(text)}
                             value={login}
@@ -80,7 +87,10 @@ export const RegistrationScreen = () => {
                             }}
                             placeholder='Адрес электронной почты'
                             placeholderTextColor='#BDBDBD'
-                            onFocus={() => { setIsEmailFocused(true) }}
+                            onFocus={() => {
+                                setIsEmailFocused(true);
+                                setIsKeyboardShown(true);
+                            }}
                             onBlur={() => { setIsEmailFocused(false) }}
                             onChangeText={text => handleSetEmail(text)}
                             value={email}
@@ -95,7 +105,10 @@ export const RegistrationScreen = () => {
                             placeholder='Пароль'
                             secureTextEntry={!isPassShown}
                             placeholderTextColor='#BDBDBD'
-                            onFocus={() => { setIsPassFocused(true) }}
+                            onFocus={() => {
+                                setIsPassFocused(true);
+                                setIsKeyboardShown(true);
+                            }}
                             onBlur={() => { setIsPassFocused(false) }}
                             onChangeText={text => handleSetPassword(text)}
                             value={password}
@@ -111,7 +124,11 @@ export const RegistrationScreen = () => {
                             }   
                         </Pressable>
                         {/* Кнопка регистрации */}
-                        <TouchableOpacity activeOpacity={0.8} style={styles.button}>
+                        <TouchableOpacity
+                            activeOpacity={0.8}
+                            style={styles.button}
+                            onPress={() => {setIsKeyboardShown(false)}}
+                        >
                             <Text style={styles.btnTitle}>Зарегистрироваться</Text>
                         </TouchableOpacity>
                         {/* ссылка перехода на страницу логина */}
