@@ -54,7 +54,7 @@ export const LoginScreen = () => {
                         <View style={{
                             ...styles.form,
                             paddingBottom: isKeyboardShown ? 0 : 45,
-                            marginBottom: isKeyboardShown ? -20 : 0,
+                            marginBottom: isKeyboardShown ? -120 : 0,
                         }}>
                             <Text style={styles.title}>Войти</Text>
                             {/* инпут для емейла */}

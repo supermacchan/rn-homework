@@ -60,7 +60,7 @@ export const RegistrationScreen = () => {
                         <View style={{
                             ...styles.form,
                             paddingBottom: isKeyboardShown ? 0 : 45,
-                            marginBottom: isKeyboardShown ? -20 : 0,
+                            marginBottom: isKeyboardShown ? -120 : 0,
                         }}>
                             {/* Контейнер для аватарки */}
                             <View style={styles.avatar}>
