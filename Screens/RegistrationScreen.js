@@ -12,60 +12,19 @@ import {
 import { useState, useEffect } from 'react';
 import { AntDesign } from "@expo/vector-icons";
 
-const primaryBg = '#E8E8E8';
-const secondaryBg = '#fff';
-const primaryBorder = 'transparent';
-const secondaryBorder = '#FF6C00';
-
-
 export const RegistrationScreen = () => {
     const [avatar, setAvatar] = useState(null);
     const [login, setLogin] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    // const [isLoginFocused, setIsLoginFocused] = useState(true);
-    // const [isEmailFocused, setIsEmailFocused] = useState(true);
-    // const [isPassFocused, setIsPassFocused] = useState(true);
-    const [inputBgColor, setInputBgColor] = useState(primaryBg);
-    const [inputBorderColor, setInputBorderColor] = useState(primaryBorder);
-
-    // const handleInputFocus = () => {
-    //     // props.onFocus;
-    //     setInputBgColor(secondaryBg);
-    //     setInputBorderColor(secondaryBorder);
-    // };
-
-    // const handleInputBlur = () => {
-    //     // props.onBlur;
-    //     setInputBgColor(primaryBg);
-    //     setInputBorderColor(primaryBg);
-    // };
+    const [isLoginFocused, setIsLoginFocused] = useState(false);
+    const [isEmailFocused, setIsEmailFocused] = useState(false);
+    const [isPassFocused, setIsPassFocused] = useState(false);
+    const [isKeyboardShown, setIsKeyboardShown] = useState(false);
 
     const handleSetLogin = text => setLogin(text);
     const handleSetEmail = text => setEmail(text);
     const handleSetPassword = text => setPassword(text);
-
-    // const handleInputFocus = (event) => {
-    //     let input = event.currentTarget.placeholder;
-    //     switch (input) {
-    //         case 'Логин': 
-    //             setIsEmailFocused(true);
-    //             setIsPassFocused(true);
-    //             setIsLoginFocused(false);
-    //             console.log(isLoginFocused);
-    //             break;
-    //         case 'Адрес электронной почты':
-    //             setIsLoginFocused(true);
-    //             setIsPassFocused(true);
-    //             setIsEmailFocused(false);
-    //             break;
-    //         case 'Пароль':
-    //             setIsLoginFocused(true);
-    //             setIsEmailFocused(true);
-    //             setIsPassFocused(false);
-    //             break;
-    //     }
-    // };
 
     return (
         <View style={styles.container}>
@@ -100,45 +59,45 @@ export const RegistrationScreen = () => {
                         {/* инпут для логина */}
                         <TextInput
                             style={{
-                                ...styles.input, 
-                                backgroundColor: inputBgColor,
-                                borderColor: inputBorderColor,
+                                ...styles.input,
+                                backgroundColor: isLoginFocused ? '#fff' : '#E8E8E8',
+                                borderColor: isLoginFocused ? '#FF6C00' : 'transparent'
                             }}
                             placeholder='Логин'
                             placeholderTextColor='#BDBDBD'
-                            // onFocus={handleInputFocus}
-                            // onBlur={handleInputBlur}
-                            value={login}
+                            onFocus={() => { setIsLoginFocused(true) }}
+                            onBlur={() => { setIsLoginFocused(false) }}
                             onChangeText={text => handleSetLogin(text)}
+                            value={login}
                         />
                         {/* инпут для емейла */}
                         <TextInput
                             style={{
-                                ...styles.input, 
-                                backgroundColor: inputBgColor,
-                                borderColor: inputBorderColor,
+                                ...styles.input,
+                                backgroundColor: isEmailFocused ? '#fff' : '#E8E8E8',
+                                borderColor: isEmailFocused ? '#FF6C00' : 'transparent'
                             }}
                             placeholder='Адрес электронной почты'
                             placeholderTextColor='#BDBDBD'
-                            // onFocus={handleInputFocus}
-                            // onBlur={handleInputBlur}
-                            value={email}
+                            onFocus={() => { setIsEmailFocused(true) }}
+                            onBlur={() => { setIsEmailFocused(false) }}
                             onChangeText={text => handleSetEmail(text)}
+                            value={email}
                         />
                         {/* инпут для пароля */}
                         <TextInput
                             style={{
-                                ...styles.input, 
-                                backgroundColor: inputBgColor,
-                                borderColor: inputBorderColor,
+                                ...styles.input,
+                                backgroundColor: isPassFocused ? '#fff' : '#E8E8E8',
+                                borderColor: isPassFocused ? '#FF6C00' : 'transparent'
                             }}
                             placeholder='Пароль'
                             secureTextEntry={true}
                             placeholderTextColor='#BDBDBD'
-                            // onFocus={handleInputFocus}
-                            // onBlur={handleInputBlur}
-                            value={password}
+                            onFocus={() => { setIsPassFocused(true) }}
+                            onBlur={() => { setIsPassFocused(false) }}
                             onChangeText={text => handleSetPassword(text)}
+                            value={password}
                         />
                         {/* Кнопка показать / скрыть пароль */}
                         <Pressable style={styles.showPass} >
@@ -224,17 +183,6 @@ const styles = StyleSheet.create({
         borderColor: 'transparent',
         fontSize: 16,
     },
-    inputFocused: {
-        marginBottom: 16,
-        padding: 16,
-        backgroundColor: '#fff',
-        height: 50,
-        borderRadius: 8,
-        borderWidth: 1,
-        borderColor: '#FF6C00',
-        color: "#212121",
-        fontSize: 16,
-    },
     showPass: {
         alignSelf: 'flex-end',
         marginTop: -50,
@@ -263,5 +211,6 @@ const styles = StyleSheet.create({
     loginNavText: {
         color: '#1B4371',
         fontSize: 16,
+        textAlign: 'center',
     }
 })
