@@ -9,7 +9,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { AntDesign } from "@expo/vector-icons";
 
 export const RegistrationScreen = () => {

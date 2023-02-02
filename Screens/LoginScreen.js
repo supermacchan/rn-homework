@@ -6,9 +6,21 @@ import {
   TextInput,
   TouchableOpacity, 
   Pressable,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
+import { useState } from 'react';
 
 export const LoginScreen = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [isEmailFocused, setIsEmailFocused] = useState(false);
+    const [isPassFocused, setIsPassFocused] = useState(false);
+    const [isKeyboardShown, setIsKeyboardShown] = useState(false);
+
+    const handleSetEmail = text => setEmail(text);
+    const handleSetPassword = text => setPassword(text);
+
     return (
         <View style={styles.container}>
             <ImageBackground
@@ -20,16 +32,32 @@ export const LoginScreen = () => {
                     <Text style={styles.title}>Войти</Text>
                     {/* инпут для емейла */}
                    <TextInput
-                        style={styles.input}
+                        style={{
+                            ...styles.input,
+                            backgroundColor: isEmailFocused ? '#fff' : '#E8E8E8',
+                            borderColor: isEmailFocused ? '#FF6C00' : 'transparent'
+                        }}
                         placeholder='Адрес электронной почты'
                         placeholderTextColor='#BDBDBD'
+                        onFocus={() => { setIsEmailFocused(true) }}
+                        onBlur={() => { setIsEmailFocused(false) }}
+                        onChangeText={text => handleSetEmail(text)}
+                        value={email}
                     />
                     {/* инпут для пароля */}
                     <TextInput
-                        style={styles.input}
+                        style={{
+                            ...styles.input,
+                            backgroundColor: isPassFocused ? '#fff' : '#E8E8E8',
+                            borderColor: isPassFocused ? '#FF6C00' : 'transparent'
+                        }}
                         placeholder='Пароль'
                         secureTextEntry={true}
                         placeholderTextColor='#BDBDBD'
+                        onFocus={() => { setIsPassFocused(true) }}
+                        onBlur={() => { setIsPassFocused(false) }}
+                        onChangeText={text => handleSetPassword(text)}
+                        value={password}
                     />
                     {/* Кнопка показать / скрыть пароль */}
                     <Pressable style={styles.showPass} >
