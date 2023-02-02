@@ -9,6 +9,7 @@ import {
     KeyboardAvoidingView,
     Platform,
     Keyboard,
+    TouchableWithoutFeedback,
 } from 'react-native';
 import { useState } from 'react';
 import { AntDesign } from "@expo/vector-icons";
@@ -34,117 +35,119 @@ export const RegistrationScreen = () => {
     }
 
     return (
-        <View style={styles.container}>
-            <ImageBackground
-                style={styles.background}
-                source={require("../assets/background.jpg")}
-            >
-                <KeyboardAvoidingView
-                    behavior={Platform.OS == 'ios' ? 'padding' : ''}
+        <TouchableWithoutFeedback onPress={hideKeyboard}>
+            <View style={styles.container}>
+                <ImageBackground
+                    style={styles.background}
+                    source={require("../assets/background.jpg")}
                 >
-                    {/* Контейнер формы регистрации */}
-                    <View style={{
-                        ...styles.form,
-                        paddingBottom: isKeyboardShown ? 0 : 45,
-                        marginBottom: isKeyboardShown ? -20 : 0,
-                    }}>
-                        {/* Контейнер для аватарки */}
-                        <View style={styles.avatar}>
-                            {/* <Image /> */}
+                    <KeyboardAvoidingView
+                        behavior={Platform.OS == 'ios' ? 'padding' : ''}
+                    >
+                        {/* Контейнер формы регистрации */}
+                        <View style={{
+                            ...styles.form,
+                            paddingBottom: isKeyboardShown ? 0 : 45,
+                            marginBottom: isKeyboardShown ? -20 : 0,
+                        }}>
+                            {/* Контейнер для аватарки */}
+                            <View style={styles.avatar}>
+                                {/* <Image /> */}
+                            </View>
+                            {/* Кнопка добавить / удалить аватарку */}
+                            {!avatar ? (
+                                <Pressable style={styles.avatarBtn} >
+                                    <Text style={styles.addAvatar}>
+                                        <AntDesign name="plus" size={20} color="#FF6C00" />
+                                    </Text>
+                                </Pressable>
+                            ) : (
+                                <Pressable style={styles.avatarBtn} >
+                                    <Text style={styles.delAvatar}>
+                                        <AntDesign name="close" size={20} color="#BDBDBD" />
+                                    </Text>
+                                </Pressable>
+                            )}
+                            <Text style={styles.title}>Регистрация</Text>
+                            {/* инпут для логина */}
+                            <TextInput
+                                style={{
+                                    ...styles.input,
+                                    backgroundColor: isLoginFocused ? '#fff' : '#E8E8E8',
+                                    borderColor: isLoginFocused ? '#FF6C00' : 'transparent'
+                                }}
+                                placeholder='Логин'
+                                placeholderTextColor='#BDBDBD'
+                                onFocus={() => {
+                                    setIsLoginFocused(true);
+                                    setIsKeyboardShown(true);
+                                }}
+                                onBlur={() => { setIsLoginFocused(false) }}
+                                onChangeText={text => handleSetLogin(text)}
+                                value={login}
+                            />
+                            {/* инпут для емейла */}
+                            <TextInput
+                                style={{
+                                    ...styles.input,
+                                    backgroundColor: isEmailFocused ? '#fff' : '#E8E8E8',
+                                    borderColor: isEmailFocused ? '#FF6C00' : 'transparent'
+                                }}
+                                placeholder='Адрес электронной почты'
+                                placeholderTextColor='#BDBDBD'
+                                onFocus={() => {
+                                    setIsEmailFocused(true);
+                                    setIsKeyboardShown(true);
+                                }}
+                                onBlur={() => { setIsEmailFocused(false) }}
+                                onChangeText={text => handleSetEmail(text)}
+                                value={email}
+                            />
+                            {/* инпут для пароля */}
+                            <TextInput
+                                style={{
+                                    ...styles.input,
+                                    backgroundColor: isPassFocused ? '#fff' : '#E8E8E8',
+                                    borderColor: isPassFocused ? '#FF6C00' : 'transparent'
+                                }}
+                                placeholder='Пароль'
+                                secureTextEntry={!isPassShown}
+                                placeholderTextColor='#BDBDBD'
+                                onFocus={() => {
+                                    setIsPassFocused(true);
+                                    setIsKeyboardShown(true);
+                                }}
+                                onBlur={() => { setIsPassFocused(false) }}
+                                onChangeText={text => handleSetPassword(text)}
+                                value={password}
+                            />
+                            {/* Кнопка показать / скрыть пароль */}
+                            <Pressable
+                                style={styles.showPass}
+                                onPress={() => { setIsPassShown(prevState => !prevState) }}
+                            >
+                                {isPassShown
+                                    ? <Text style={styles.showPassText}>Скрыть</Text>
+                                    : <Text style={styles.showPassText}>Показать</Text>
+                                }   
+                            </Pressable>
+                            {/* Кнопка регистрации */}
+                            <TouchableOpacity
+                                activeOpacity={0.8}
+                                style={styles.button}
+                                onPress={hideKeyboard}
+                            >
+                                <Text style={styles.btnTitle}>Зарегистрироваться</Text>
+                            </TouchableOpacity>
+                            {/* ссылка перехода на страницу логина */}
+                            <Pressable style={styles.loginNav} >
+                                <Text style={styles.loginNavText}>Уже есть аккаунт? Войти</Text>
+                            </Pressable>
                         </View>
-                        {/* Кнопка добавить / удалить аватарку */}
-                        {!avatar ? (
-                            <Pressable style={styles.avatarBtn} >
-                                <Text style={styles.addAvatar}>
-                                    <AntDesign name="plus" size={20} color="#FF6C00" />
-                                </Text>
-                            </Pressable>
-                        ) : (
-                            <Pressable style={styles.avatarBtn} >
-                                <Text style={styles.delAvatar}>
-                                    <AntDesign name="close" size={20} color="#BDBDBD" />
-                                </Text>
-                            </Pressable>
-                        )}
-                        <Text style={styles.title}>Регистрация</Text>
-                        {/* инпут для логина */}
-                        <TextInput
-                            style={{
-                                ...styles.input,
-                                backgroundColor: isLoginFocused ? '#fff' : '#E8E8E8',
-                                borderColor: isLoginFocused ? '#FF6C00' : 'transparent'
-                            }}
-                            placeholder='Логин'
-                            placeholderTextColor='#BDBDBD'
-                            onFocus={() => {
-                                setIsLoginFocused(true);
-                                setIsKeyboardShown(true);
-                            }}
-                            onBlur={() => { setIsLoginFocused(false) }}
-                            onChangeText={text => handleSetLogin(text)}
-                            value={login}
-                        />
-                        {/* инпут для емейла */}
-                        <TextInput
-                            style={{
-                                ...styles.input,
-                                backgroundColor: isEmailFocused ? '#fff' : '#E8E8E8',
-                                borderColor: isEmailFocused ? '#FF6C00' : 'transparent'
-                            }}
-                            placeholder='Адрес электронной почты'
-                            placeholderTextColor='#BDBDBD'
-                            onFocus={() => {
-                                setIsEmailFocused(true);
-                                setIsKeyboardShown(true);
-                            }}
-                            onBlur={() => { setIsEmailFocused(false) }}
-                            onChangeText={text => handleSetEmail(text)}
-                            value={email}
-                        />
-                        {/* инпут для пароля */}
-                        <TextInput
-                            style={{
-                                ...styles.input,
-                                backgroundColor: isPassFocused ? '#fff' : '#E8E8E8',
-                                borderColor: isPassFocused ? '#FF6C00' : 'transparent'
-                            }}
-                            placeholder='Пароль'
-                            secureTextEntry={!isPassShown}
-                            placeholderTextColor='#BDBDBD'
-                            onFocus={() => {
-                                setIsPassFocused(true);
-                                setIsKeyboardShown(true);
-                            }}
-                            onBlur={() => { setIsPassFocused(false) }}
-                            onChangeText={text => handleSetPassword(text)}
-                            value={password}
-                        />
-                        {/* Кнопка показать / скрыть пароль */}
-                        <Pressable
-                            style={styles.showPass}
-                            onPress={() => { setIsPassShown(prevState => !prevState) }}
-                        >
-                            {isPassShown
-                                ? <Text style={styles.showPassText}>Скрыть</Text>
-                                : <Text style={styles.showPassText}>Показать</Text>
-                            }   
-                        </Pressable>
-                        {/* Кнопка регистрации */}
-                        <TouchableOpacity
-                            activeOpacity={0.8}
-                            style={styles.button}
-                            onPress={hideKeyboard}
-                        >
-                            <Text style={styles.btnTitle}>Зарегистрироваться</Text>
-                        </TouchableOpacity>
-                        {/* ссылка перехода на страницу логина */}
-                        <Pressable style={styles.loginNav} >
-                            <Text style={styles.loginNavText}>Уже есть аккаунт? Войти</Text>
-                        </Pressable>
-                    </View>
-                </KeyboardAvoidingView>
-            </ImageBackground>
-        </View>
+                    </KeyboardAvoidingView>
+                </ImageBackground>
+            </View>
+        </TouchableWithoutFeedback>
     );
 };
 
