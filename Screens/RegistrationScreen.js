@@ -6,6 +6,8 @@ import {
   TextInput,
   TouchableOpacity, 
   Pressable,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import { useState, useEffect } from 'react';
 import { AntDesign } from "@expo/vector-icons";
@@ -71,83 +73,87 @@ export const RegistrationScreen = () => {
                 style={styles.background}
                 source={require("../assets/background.jpg")}
             >
-                {/* Контейнер формы регистрации */}
-                <View style={styles.form}>
-                    {/* Контейнер для аватарки */}
-                    <View style={styles.avatar}>
-                        {/* <Image /> */}
+                <KeyboardAvoidingView
+                    behavior={Platform.OS == 'ios' ? 'padding' : ''}
+                >
+                    {/* Контейнер формы регистрации */}
+                    <View style={styles.form}>
+                        {/* Контейнер для аватарки */}
+                        <View style={styles.avatar}>
+                            {/* <Image /> */}
+                        </View>
+                        {/* Кнопка добавить / удалить аватарку */}
+                        {!avatar ? (
+                            <Pressable style={styles.avatarBtn} >
+                                <Text style={styles.addAvatar}>
+                                    <AntDesign name="plus" size={20} color="#FF6C00" />
+                                </Text>
+                            </Pressable>
+                        ) : (
+                            <Pressable style={styles.avatarBtn} >
+                                <Text style={styles.delAvatar}>
+                                    <AntDesign name="close" size={20} color="#BDBDBD" />
+                                </Text>
+                            </Pressable>
+                        )}
+                        <Text style={styles.title}>Регистрация</Text>
+                        {/* инпут для логина */}
+                        <TextInput
+                            style={{
+                                ...styles.input, 
+                                backgroundColor: inputBgColor,
+                                borderColor: inputBorderColor,
+                            }}
+                            placeholder='Логин'
+                            placeholderTextColor='#BDBDBD'
+                            // onFocus={handleInputFocus}
+                            // onBlur={handleInputBlur}
+                            value={login}
+                            onChangeText={text => handleSetLogin(text)}
+                        />
+                        {/* инпут для емейла */}
+                        <TextInput
+                            style={{
+                                ...styles.input, 
+                                backgroundColor: inputBgColor,
+                                borderColor: inputBorderColor,
+                            }}
+                            placeholder='Адрес электронной почты'
+                            placeholderTextColor='#BDBDBD'
+                            // onFocus={handleInputFocus}
+                            // onBlur={handleInputBlur}
+                            value={email}
+                            onChangeText={text => handleSetEmail(text)}
+                        />
+                        {/* инпут для пароля */}
+                        <TextInput
+                            style={{
+                                ...styles.input, 
+                                backgroundColor: inputBgColor,
+                                borderColor: inputBorderColor,
+                            }}
+                            placeholder='Пароль'
+                            secureTextEntry={true}
+                            placeholderTextColor='#BDBDBD'
+                            // onFocus={handleInputFocus}
+                            // onBlur={handleInputBlur}
+                            value={password}
+                            onChangeText={text => handleSetPassword(text)}
+                        />
+                        {/* Кнопка показать / скрыть пароль */}
+                        <Pressable style={styles.showPass} >
+                            <Text style={styles.showPassText}>Показать</Text>
+                        </Pressable>
+                        {/* Кнопка регистрации */}
+                        <TouchableOpacity activeOpacity={0.8} style={styles.button}>
+                            <Text style={styles.btnTitle}>Зарегистрироваться</Text>
+                        </TouchableOpacity>
+                        {/* ссылка перехода на страницу логина */}
+                        <Pressable style={styles.loginNav} >
+                            <Text style={styles.loginNavText}>Уже есть аккаунт? Войти</Text>
+                        </Pressable>
                     </View>
-                    {/* Кнопка добавить / удалить аватарку */}
-                    {!avatar ? (
-                        <Pressable style={styles.avatarBtn} >
-                            <Text style={styles.addAvatar}>
-                                <AntDesign name="plus" size={20} color="#FF6C00" />
-                            </Text>
-                        </Pressable>
-                    ) : (
-                        <Pressable style={styles.avatarBtn} >
-                            <Text style={styles.delAvatar}>
-                                <AntDesign name="close" size={20} color="#BDBDBD" />
-                            </Text>
-                        </Pressable>
-                    )}
-                    <Text style={styles.title}>Регистрация</Text>
-                    {/* инпут для логина */}
-                    <TextInput
-                        style={{
-                            ...styles.input, 
-                            backgroundColor: inputBgColor,
-                            borderColor: inputBorderColor,
-                        }}
-                        placeholder='Логин'
-                        placeholderTextColor='#BDBDBD'
-                        // onFocus={handleInputFocus}
-                        // onBlur={handleInputBlur}
-                        value={login}
-                        onChangeText={text => handleSetLogin(text)}
-                    />
-                    {/* инпут для емейла */}
-                    <TextInput
-                        style={{
-                            ...styles.input, 
-                            backgroundColor: inputBgColor,
-                            borderColor: inputBorderColor,
-                        }}
-                        placeholder='Адрес электронной почты'
-                        placeholderTextColor='#BDBDBD'
-                        // onFocus={handleInputFocus}
-                        // onBlur={handleInputBlur}
-                        value={email}
-                        onChangeText={text => handleSetEmail(text)}
-                    />
-                    {/* инпут для пароля */}
-                    <TextInput
-                        style={{
-                            ...styles.input, 
-                            backgroundColor: inputBgColor,
-                            borderColor: inputBorderColor,
-                        }}
-                        placeholder='Пароль'
-                        secureTextEntry={true}
-                        placeholderTextColor='#BDBDBD'
-                        // onFocus={handleInputFocus}
-                        // onBlur={handleInputBlur}
-                        value={password}
-                        onChangeText={text => handleSetPassword(text)}
-                    />
-                    {/* Кнопка показать / скрыть пароль */}
-                    <Pressable style={styles.showPass} >
-                        <Text style={styles.showPassText}>Показать</Text>
-                    </Pressable>
-                    {/* Кнопка регистрации */}
-                    <TouchableOpacity activeOpacity={0.8} style={styles.button}>
-                        <Text style={styles.btnTitle}>Зарегистрироваться</Text>
-                    </TouchableOpacity>
-                    {/* ссылка перехода на страницу логина */}
-                    <Pressable style={styles.loginNav} >
-                        <Text style={styles.loginNavText}>Уже есть аккаунт? Войти</Text>
-                    </Pressable>
-                </View>
+                </KeyboardAvoidingView>
             </ImageBackground>
         </View>
     );
