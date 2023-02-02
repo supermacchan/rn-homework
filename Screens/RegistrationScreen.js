@@ -216,6 +216,7 @@ const styles = StyleSheet.create({
         fontSize: 30,
         color: '#000',
         textAlign: 'center',
+        fontFamily: "Roboto-Medium",
     },
     input: {
         marginBottom: 16,
@@ -227,6 +228,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'transparent',
         fontSize: 16,
+        fontFamily: "Roboto-Regular",
     },
     showPass: {
         alignSelf: 'flex-end',
@@ -235,6 +237,7 @@ const styles = StyleSheet.create({
     },
     showPassText: {
         fontSize: 16,
+        fontFamily: "Roboto-Regular",
         color: '#1B4371',
     },
     button: {
@@ -249,6 +252,7 @@ const styles = StyleSheet.create({
     btnTitle: {
         color: '#fff',
         fontSize: 16,
+        fontFamily: "Roboto-Regular",
     },
     loginNav: {
         textAlign: 'center',
@@ -256,6 +260,7 @@ const styles = StyleSheet.create({
     loginNavText: {
         color: '#1B4371',
         fontSize: 16,
+        fontFamily: "Roboto-Regular",
         textAlign: 'center',
     }
 })
