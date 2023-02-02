@@ -32,7 +32,19 @@ export const RegistrationScreen = () => {
     const hideKeyboard = () => {
         setIsKeyboardShown(false);
         Keyboard.dismiss();
-    }
+    };
+
+    const handleFormSubmit = () => {
+        console.log(`Регистрируем пользователя ${login}, адрес электронной почты: ${email}, пароль: ${password}`);
+        valueReset();
+        hideKeyboard();
+    };
+
+    const valueReset = () => {
+        setLogin('');
+        setEmail('');
+        setPassword('');
+    };
 
     return (
         <TouchableWithoutFeedback onPress={hideKeyboard}>
@@ -135,7 +147,7 @@ export const RegistrationScreen = () => {
                             <TouchableOpacity
                                 activeOpacity={0.8}
                                 style={styles.button}
-                                onPress={hideKeyboard}
+                                onPress={handleFormSubmit}
                             >
                                 <Text style={styles.btnTitle}>Зарегистрироваться</Text>
                             </TouchableOpacity>
