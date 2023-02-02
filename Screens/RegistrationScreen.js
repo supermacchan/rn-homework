@@ -21,6 +21,7 @@ export const RegistrationScreen = () => {
     const [isEmailFocused, setIsEmailFocused] = useState(false);
     const [isPassFocused, setIsPassFocused] = useState(false);
     const [isKeyboardShown, setIsKeyboardShown] = useState(false);
+    const [isPassShown, setIsPassShown] = useState(false);
 
     const handleSetLogin = text => setLogin(text);
     const handleSetEmail = text => setEmail(text);
@@ -92,7 +93,7 @@ export const RegistrationScreen = () => {
                                 borderColor: isPassFocused ? '#FF6C00' : 'transparent'
                             }}
                             placeholder='Пароль'
-                            secureTextEntry={true}
+                            secureTextEntry={!isPassShown}
                             placeholderTextColor='#BDBDBD'
                             onFocus={() => { setIsPassFocused(true) }}
                             onBlur={() => { setIsPassFocused(false) }}
@@ -100,7 +101,10 @@ export const RegistrationScreen = () => {
                             value={password}
                         />
                         {/* Кнопка показать / скрыть пароль */}
-                        <Pressable style={styles.showPass} >
+                        <Pressable
+                            style={styles.showPass}
+                            onPress={() => { setIsPassShown(prevState => !prevState) }}
+                        >
                             <Text style={styles.showPassText}>Показать</Text>
                         </Pressable>
                         {/* Кнопка регистрации */}
