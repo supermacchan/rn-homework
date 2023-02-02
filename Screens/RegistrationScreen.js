@@ -12,16 +12,43 @@ import { AntDesign } from "@expo/vector-icons";
 
 export const RegistrationScreen = () => {
     const [avatar, setAvatar] = useState(null);
-    const [inputName, setInputName] = useState('');
-    const [isFocused, setIsFocused] = useState(false);
+    // const [inputName, setInputName] = useState('');
+    const [login, setLogin] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [isLoginFocused, setIsLoginFocused] = useState(true);
+    const [isEmailFocused, setIsEmailFocused] = useState(true);
+    const [isPassFocused, setIsPassFocused] = useState(true);
 
-    useEffect(() => {
-        setIsFocused(true);
-    }, [inputName])
+
+    // useEffect(() => {
+    //     setIsFocused(true);
+    // }, [login, email, password])
+
+    const handleSetLogin = text => setLogin(text);
+    const handleSetEmail = text => setEmail(text);
+    const handleSetPassword = text => setPassword(text);
 
     const handleInputFocus = (event) => {
         let input = event.currentTarget.placeholder;
-        setInputName(input);
+        switch (input) {
+            case 'Логин': 
+                setIsEmailFocused(true);
+                setIsPassFocused(true);
+                setIsLoginFocused(false);
+                console.log(isLoginFocused);
+                break;
+            case 'Адрес электронной почты':
+                setIsLoginFocused(true);
+                setIsPassFocused(true);
+                setIsEmailFocused(false);
+                break;
+            case 'Пароль':
+                setIsLoginFocused(true);
+                setIsEmailFocused(true);
+                setIsPassFocused(false);
+                break;
+        }
     };
 
     return (
@@ -53,31 +80,37 @@ export const RegistrationScreen = () => {
                     <Text style={styles.title}>Регистрация</Text>
                     {/* инпут для логина */}
                     <TextInput
-                        style={(inputName === 'Логин' && isFocused)
+                        style={isLoginFocused
                             ? { ...styles.input }
                             : { ...styles.inputFocused }}
                         placeholder='Логин'
                         placeholderTextColor='#BDBDBD'
                         onFocus={handleInputFocus}
+                        value={login}
+                        onChangeText={text => handleSetLogin(text)}
                     />
                     {/* инпут для емейла */}
                     <TextInput
-                        style={(inputName === 'Адрес электронной почты' && isFocused)
+                        style={isEmailFocused
                             ? { ...styles.input }
                             : { ...styles.inputFocused }}
                         placeholder='Адрес электронной почты'
                         placeholderTextColor='#BDBDBD'
                         onFocus={handleInputFocus}
+                        value={email}
+                        onChangeText={text => handleSetEmail(text)}
                     />
                     {/* инпут для пароля */}
                     <TextInput
-                        style={(inputName === 'Пароль' && isFocused)
+                        style={isPassFocused
                             ? { ...styles.input }
                             : { ...styles.inputFocused }}
                         placeholder='Пароль'
                         secureTextEntry={true}
                         placeholderTextColor='#BDBDBD'
                         onFocus={handleInputFocus}
+                        value={password}
+                        onChangeText={text => handleSetPassword(text)}
                     />
                     {/* Кнопка показать / скрыть пароль */}
                     <Pressable style={styles.showPass} >
