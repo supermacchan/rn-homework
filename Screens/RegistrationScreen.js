@@ -10,46 +10,60 @@ import {
 import { useState, useEffect } from 'react';
 import { AntDesign } from "@expo/vector-icons";
 
+const primaryBg = '#E8E8E8';
+const secondaryBg = '#fff';
+const primaryBorder = 'transparent';
+const secondaryBorder = '#FF6C00';
+
+
 export const RegistrationScreen = () => {
     const [avatar, setAvatar] = useState(null);
-    // const [inputName, setInputName] = useState('');
     const [login, setLogin] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isLoginFocused, setIsLoginFocused] = useState(true);
-    const [isEmailFocused, setIsEmailFocused] = useState(true);
-    const [isPassFocused, setIsPassFocused] = useState(true);
+    // const [isLoginFocused, setIsLoginFocused] = useState(true);
+    // const [isEmailFocused, setIsEmailFocused] = useState(true);
+    // const [isPassFocused, setIsPassFocused] = useState(true);
+    const [inputBgColor, setInputBgColor] = useState(primaryBg);
+    const [inputBorderColor, setInputBorderColor] = useState(primaryBorder);
 
+    // const handleInputFocus = () => {
+    //     // props.onFocus;
+    //     setInputBgColor(secondaryBg);
+    //     setInputBorderColor(secondaryBorder);
+    // };
 
-    // useEffect(() => {
-    //     setIsFocused(true);
-    // }, [login, email, password])
+    // const handleInputBlur = () => {
+    //     // props.onBlur;
+    //     setInputBgColor(primaryBg);
+    //     setInputBorderColor(primaryBg);
+    // };
 
     const handleSetLogin = text => setLogin(text);
     const handleSetEmail = text => setEmail(text);
     const handleSetPassword = text => setPassword(text);
 
-    const handleInputFocus = (event) => {
-        let input = event.currentTarget.placeholder;
-        switch (input) {
-            case 'Логин': 
-                setIsEmailFocused(true);
-                setIsPassFocused(true);
-                setIsLoginFocused(false);
-                console.log(isLoginFocused);
-                break;
-            case 'Адрес электронной почты':
-                setIsLoginFocused(true);
-                setIsPassFocused(true);
-                setIsEmailFocused(false);
-                break;
-            case 'Пароль':
-                setIsLoginFocused(true);
-                setIsEmailFocused(true);
-                setIsPassFocused(false);
-                break;
-        }
-    };
+    // const handleInputFocus = (event) => {
+    //     let input = event.currentTarget.placeholder;
+    //     switch (input) {
+    //         case 'Логин': 
+    //             setIsEmailFocused(true);
+    //             setIsPassFocused(true);
+    //             setIsLoginFocused(false);
+    //             console.log(isLoginFocused);
+    //             break;
+    //         case 'Адрес электронной почты':
+    //             setIsLoginFocused(true);
+    //             setIsPassFocused(true);
+    //             setIsEmailFocused(false);
+    //             break;
+    //         case 'Пароль':
+    //             setIsLoginFocused(true);
+    //             setIsEmailFocused(true);
+    //             setIsPassFocused(false);
+    //             break;
+    //     }
+    // };
 
     return (
         <View style={styles.container}>
@@ -80,35 +94,44 @@ export const RegistrationScreen = () => {
                     <Text style={styles.title}>Регистрация</Text>
                     {/* инпут для логина */}
                     <TextInput
-                        style={isLoginFocused
-                            ? { ...styles.input }
-                            : { ...styles.inputFocused }}
+                        style={{
+                            ...styles.input, 
+                            backgroundColor: inputBgColor,
+                            borderColor: inputBorderColor,
+                        }}
                         placeholder='Логин'
                         placeholderTextColor='#BDBDBD'
-                        onFocus={handleInputFocus}
+                        // onFocus={handleInputFocus}
+                        // onBlur={handleInputBlur}
                         value={login}
                         onChangeText={text => handleSetLogin(text)}
                     />
                     {/* инпут для емейла */}
                     <TextInput
-                        style={isEmailFocused
-                            ? { ...styles.input }
-                            : { ...styles.inputFocused }}
+                        style={{
+                            ...styles.input, 
+                            backgroundColor: inputBgColor,
+                            borderColor: inputBorderColor,
+                        }}
                         placeholder='Адрес электронной почты'
                         placeholderTextColor='#BDBDBD'
-                        onFocus={handleInputFocus}
+                        // onFocus={handleInputFocus}
+                        // onBlur={handleInputBlur}
                         value={email}
                         onChangeText={text => handleSetEmail(text)}
                     />
                     {/* инпут для пароля */}
                     <TextInput
-                        style={isPassFocused
-                            ? { ...styles.input }
-                            : { ...styles.inputFocused }}
+                        style={{
+                            ...styles.input, 
+                            backgroundColor: inputBgColor,
+                            borderColor: inputBorderColor,
+                        }}
                         placeholder='Пароль'
                         secureTextEntry={true}
                         placeholderTextColor='#BDBDBD'
-                        onFocus={handleInputFocus}
+                        // onFocus={handleInputFocus}
+                        // onBlur={handleInputBlur}
                         value={password}
                         onChangeText={text => handleSetPassword(text)}
                     />
@@ -198,7 +221,7 @@ const styles = StyleSheet.create({
     inputFocused: {
         marginBottom: 16,
         padding: 16,
-        backgroundColor: '#E8E8E8',
+        backgroundColor: '#fff',
         height: 50,
         borderRadius: 8,
         borderWidth: 1,
