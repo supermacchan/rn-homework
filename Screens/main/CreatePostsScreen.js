@@ -5,8 +5,12 @@ import {
     View,
     KeyboardAvoidingView,
     Platform,
-    Pressable
+    Pressable,
+    Text,
+    TextInput,
+    TouchableOpacity,
 } from "react-native";
+import { useState } from 'react';
 import { AntDesign } from '@expo/vector-icons'; 
 
 export const CreatePostsScreen = () => {
@@ -21,7 +25,7 @@ export const CreatePostsScreen = () => {
         <TouchableWithoutFeedback onPress={hideKeyboard}>
             <View style={styles.container}>
                 <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? 'padding' : ''} >
-                    {/* Main container */}
+                    {/* Main form container */}
                     <View style={{
                         paddingBottom: isKeyboardShown ? 0 : 45,
                         marginBottom: isKeyboardShown ? -120 : 0,
@@ -33,6 +37,19 @@ export const CreatePostsScreen = () => {
                                 <AntDesign name="camera" size={24} color="#BDBDBD" />
                             </Pressable>
                         </View>
+                        <Text>Загрузите фото</Text>
+                        <TextInput placeholder="Название..." />
+                        <TextInput placeholder="Местность..." />
+                        {/* Кнопка публикации */}
+                        <TouchableOpacity
+                            activeOpacity={0.8}
+                            style={styles.button}
+                        >
+                            <Text style={styles.btnTitle}>Опубликовать</Text>
+                        </TouchableOpacity>
+                        <Pressable>
+                            <AntDesign name="delete" size={24} color="#BDBDBD" />
+                        </Pressable>
                     </View>
                 </KeyboardAvoidingView>
             </View>
@@ -44,5 +61,19 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+    },
+    button: {
+        backgroundColor: '#FF6C00',
+        borderRadius: 100,
+        marginTop: 59,
+        marginBottom: 16,
+        padding: 16,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    btnTitle: {
+        color: '#fff',
+        fontSize: 16,
+        fontFamily: "Roboto-Regular",
     },
 })

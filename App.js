@@ -8,6 +8,7 @@ import * as Font from 'expo-font';
 import * as SplashScreen from "expo-splash-screen";
 import { RegistrationScreen } from './Screens/auth/RegistrationScreen';
 import { LoginScreen } from './Screens/auth/LoginScreen';
+import { CreatePostsScreen } from './Screens/main/CreatePostsScreen';
 
 const fonts = {
   "Roboto-Regular": require("./assets/fonts/Roboto/Roboto-Regular.ttf"),
@@ -38,8 +39,9 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <RegistrationScreen />
+      {/* <RegistrationScreen /> */}
       {/* <LoginScreen /> */}
+      <CreatePostsScreen />
 
       <StatusBar style="auto" />
     </View>
