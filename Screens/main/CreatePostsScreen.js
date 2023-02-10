@@ -27,11 +27,12 @@ export const CreatePostsScreen = () => {
                 <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? 'padding' : ''} >
                     {/* Main form container */}
                     <View style={{
+                        ...styles.form,
                         paddingBottom: isKeyboardShown ? 0 : 45,
                         marginBottom: isKeyboardShown ? -120 : 0,
                     }}>
                         {/* Image container */}
-                        <View>
+                        <View style={styles.imgContainer}>
                             {/* <Image /> */}
                             <Pressable>
                                 <AntDesign name="camera" size={24} color="#BDBDBD" />
@@ -61,6 +62,19 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+    },
+    form: {
+        paddingTop: 32,
+        paddingBottom: 45,
+        paddingHorizontal: 16,
+        backgroundColor: '#fff',
+    },
+    imgContainer: {
+        backgroundColor: '#F6F6F6',
+        height: 240,
+        borderWidth: 1,
+        borderColor: '#E8E8E8',
+        borderRadius: 8,
     },
     button: {
         backgroundColor: '#FF6C00',
