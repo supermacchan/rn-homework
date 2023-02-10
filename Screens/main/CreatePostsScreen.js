@@ -61,6 +61,7 @@ export const CreatePostsScreen = () => {
                         >
                             <Text style={styles.btnTitle}>Опубликовать</Text>
                         </TouchableOpacity>
+                        {/* Toolbar */}
                         <Pressable style={styles.deleteBtn}>
                             <AntDesign name="delete" size={24} color="#BDBDBD" />
                         </Pressable>
