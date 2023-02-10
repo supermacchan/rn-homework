@@ -25,7 +25,7 @@ export const CreatePostsScreen = () => {
         <TouchableWithoutFeedback onPress={hideKeyboard}>
             <View style={styles.container}>
                 <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? 'padding' : ''} >
-                    {/* Main form container */}
+                    {/* Form container */}
                     <View style={{
                         ...styles.form,
                         paddingBottom: isKeyboardShown ? 0 : 45,
@@ -34,13 +34,21 @@ export const CreatePostsScreen = () => {
                         {/* Image container */}
                         <View style={styles.imgContainer}>
                             {/* <Image /> */}
-                            <Pressable>
+                            <Pressable style={styles.addImgBtn}>
                                 <AntDesign name="camera" size={24} color="#BDBDBD" />
                             </Pressable>
                         </View>
-                        <Text>Загрузите фото</Text>
-                        <TextInput placeholder="Название..." />
-                        <TextInput placeholder="Местность..." />
+                        <Text style={styles.addImage}>Загрузите фото</Text>
+                        <TextInput
+                            placeholder="Название..."
+                            placeholderTextColor={'#BDBDBD'}
+                            style={styles.postTitle}
+                        />
+                        <TextInput
+                            placeholder="Местность..."
+                            placeholderTextColor={'#BDBDBD'}
+                            style={styles.postLocation}
+                        />
                         {/* Кнопка публикации */}
                         <TouchableOpacity
                             activeOpacity={0.8}
@@ -48,7 +56,7 @@ export const CreatePostsScreen = () => {
                         >
                             <Text style={styles.btnTitle}>Опубликовать</Text>
                         </TouchableOpacity>
-                        <Pressable>
+                        <Pressable style={styles.deleteBtn}>
                             <AntDesign name="delete" size={24} color="#BDBDBD" />
                         </Pressable>
                     </View>
@@ -62,6 +70,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+        paddingTop: 32,
     },
     form: {
         paddingTop: 32,
@@ -75,12 +84,45 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#E8E8E8',
         borderRadius: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    addImgBtn: {
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    addImage: {
+        color: '#BDBDBD',
+        fontFamily: "Roboto-Regular",
+        fontSize: 16,
+        marginTop: 6,
+    },
+    postTitle: {
+        marginTop: 32,
+        paddingVertical: 15,
+        paddingHorizontal: 0,
+        borderBottomWidth: 1,
+        borderBottomColor: '#E8E8E8',
+        fontFamily: "Roboto-Regular",
+        fontSize: 16,
+    },
+    postLocation: {
+        marginTop: 16,
+        paddingVertical: 15,
+        paddingHorizontal: 0,
+        borderBottomWidth: 1,
+        borderBottomColor: '#E8E8E8',
+        fontFamily: "Roboto-Regular",
+        fontSize: 16,
     },
     button: {
         backgroundColor: '#FF6C00',
         borderRadius: 100,
-        marginTop: 59,
-        marginBottom: 16,
+        marginTop: 32,
         padding: 16,
         justifyContent: 'center',
         alignItems: 'center',
@@ -90,4 +132,14 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily: "Roboto-Regular",
     },
+    deleteBtn: {
+        backgroundColor: '#F6F6F6',
+        width: 70,
+        height: 40,
+        borderRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
+        marginTop: 120,
+    }
 })
