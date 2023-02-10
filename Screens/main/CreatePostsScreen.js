@@ -38,7 +38,12 @@ export const CreatePostsScreen = () => {
                                 <AntDesign name="camera" size={24} color="#BDBDBD" />
                             </Pressable>
                         </View>
-                        <Text style={styles.addImage}>Загрузите фото</Text>
+                        <Pressable>
+                            <Text style={styles.addImage}>Загрузите фото</Text>
+                        </Pressable>
+                        {/* <Pressable>
+                            <Text style={styles.addImage}>Редактировать фото</Text>
+                        </Pressable> */}
                         <TextInput
                             placeholder="Название..."
                             placeholderTextColor={'#BDBDBD'}
@@ -99,7 +104,7 @@ const styles = StyleSheet.create({
         color: '#BDBDBD',
         fontFamily: "Roboto-Regular",
         fontSize: 16,
-        marginTop: 6,
+        paddingTop: 6,
     },
     postTitle: {
         marginTop: 32,
@@ -109,6 +114,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#E8E8E8',
         fontFamily: "Roboto-Regular",
         fontSize: 16,
+        color: '#000',
     },
     postLocation: {
         marginTop: 16,
@@ -118,6 +124,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#E8E8E8',
         fontFamily: "Roboto-Regular",
         fontSize: 16,
+        color: '#000',
     },
     button: {
         backgroundColor: '#FF6C00',
