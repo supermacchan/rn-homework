@@ -11,10 +11,13 @@ export const PostsScreen = () => {
     return (
         <View style={styles.container}>
             {/* Профиль */}
-            <View>
-                <Image />
-                <Text>ИМЯ</Text>
-                <Text>EMAIL</Text>
+            <View style={styles.profileContainer}>
+                {/* контейнер для аватарки */}
+                <View style={styles.imgContainer}>
+                    <Image />
+                </View>
+                <Text style={styles.name}>ИМЯ</Text>
+                <Text style={styles.email}>EMAIL</Text>
             </View>
             <FlatList>
                 <SinglePost />
@@ -30,4 +33,20 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         paddingTop: 32,
     },
+    profileContainer: {
+        backgroundColor: '#fff',
+        // flexDirection: 'row',
+    },
+    imgContainer: {
+        backgroundColor: '#E8E8E8',
+        width: 60,
+        height: 60,
+        borderRadius: 16,
+    },
+    name: {
+
+    },
+    email: {
+
+    }
 })
