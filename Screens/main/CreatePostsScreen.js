@@ -54,6 +54,7 @@ export const CreatePostsScreen = () => {
                             placeholderTextColor={'#BDBDBD'}
                             style={styles.postLocation}
                         />
+                        {/* <AntDesign name="enviromento" size={24} color="black" /> */}
                         {/* Кнопка публикации */}
                         <TouchableOpacity
                             activeOpacity={0.8}

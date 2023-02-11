@@ -1,36 +1,19 @@
 import {
     StyleSheet,
-    Keyboard,
-    TouchableWithoutFeedback,
     View,
-    KeyboardAvoidingView,
-    Platform,
     Pressable,
     Text,
     TextInput,
     TouchableOpacity,
 } from "react-native";
-import { useState } from 'react';
 import { AntDesign } from '@expo/vector-icons'; 
 
 export const PostsScreen = () => {
-    const [isKeyboardShown, setIsKeyboardShown] = useState(false);
-
-    const hideKeyboard = () => {
-        setIsKeyboardShown(false);
-        Keyboard.dismiss();
-    };
-
     return (
-        <TouchableWithoutFeedback onPress={hideKeyboard}>
+        
             <View style={styles.container}>
-                <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? 'padding' : ''} >
                     {/* Form container */}
-                    <View style={{
-                        ...styles.form,
-                        paddingBottom: isKeyboardShown ? 0 : 45,
-                        marginBottom: isKeyboardShown ? -120 : 0,
-                    }}>
+                    <View style={styles.form}>
                         {/* Image container */}
                         <View style={styles.imgContainer}>
                             {/* <Image /> */}
@@ -50,7 +33,7 @@ export const PostsScreen = () => {
                             style={styles.postTitle}
                         />
                         <TextInput
-                            placeholder="Местность..."
+                            placeholder='shalala'
                             placeholderTextColor={'#BDBDBD'}
                             style={styles.postLocation}
                         />
@@ -66,9 +49,9 @@ export const PostsScreen = () => {
                             <AntDesign name="delete" size={24} color="#BDBDBD" />
                         </Pressable>
                     </View>
-                </KeyboardAvoidingView>
+                
             </View>
-        </TouchableWithoutFeedback>
+       
     );
 }
 
