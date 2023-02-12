@@ -45,7 +45,7 @@ export const CommentsScreen = () => {
                         </View>
                         {/* Comments section */}
                         <FlatList>
-                            {/* Тут будут рендериться посты */}
+                            {/* Тут будут рендериться комменты */}
                         </FlatList>
                     </View>
                 </KeyboardAvoidingView>
