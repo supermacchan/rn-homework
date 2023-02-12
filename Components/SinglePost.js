@@ -19,12 +19,16 @@ export const SinglePost = () => {
                     objectFit='cover'
                 />
             </View>
+            {/* Image title */}
             <Text style={styles.title}>Название</Text>
+            {/* Comments-Location section */}
             <View style={styles.links}>
+                {/* Comments Button */}
                 <Pressable style={styles.commentsBtn}>
                     <EvilIcons name="comment" size={24} color="#BDBDBD" />
                     <Text style={styles.comments}>000</Text>
                 </Pressable>
+                {/* Location Button */}
                 <Pressable style={styles.locationBtn}>
                     <AntDesign name="enviromento" size={24} color="#BDBDBD" />
                     <Text style={styles.location}>Локация</Text>
