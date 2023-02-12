@@ -13,17 +13,23 @@ export const SinglePost = () => {
         <View style={styles.post}>
             {/* Image container */}
             <View style={styles.imgContainer}>
-                <Image />
+                <Image
+                    style={styles.image}
+                    source={require('../assets/test-post.jpg')}
+                    objectFit='cover'
+                />
             </View>
             <Text style={styles.title}>Название</Text>
-            <Pressable style={styles.commentsBtn}>
-                <EvilIcons name="comment" size={24} color="#BDBDBD" />
-                <Text style={styles.comments}>000</Text>
-            </Pressable>
-            <Pressable>
-                <AntDesign name="enviromento" size={24} color="#BDBDBD" />
-                <Text>Локация</Text>
-            </Pressable>
+            <View style={styles.links}>
+                <Pressable style={styles.commentsBtn}>
+                    <EvilIcons name="comment" size={24} color="#BDBDBD" />
+                    <Text style={styles.comments}>000</Text>
+                </Pressable>
+                <Pressable style={styles.locationBtn}>
+                    <AntDesign name="enviromento" size={24} color="#BDBDBD" />
+                    <Text style={styles.location}>Локация</Text>
+                </Pressable>
+            </View>
         </View>
     );
 };
@@ -38,14 +44,23 @@ const styles = StyleSheet.create({
         backgroundColor: '#E8E8E8',
         borderRadius: 8
     },
+    image: {
+        width: '100%',
+        borderRadius: 8
+    },
     title: {
         fontFamily: "Roboto-Medium",
         fontSize: 16,
         color: '#000',
         marginTop: 8,
     },
-    commentsBtn: {
+    links: {
         marginTop: 8,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    commentsBtn: {
         flexDirection: 'row',
         alignItems: 'center'
     },
@@ -54,5 +69,15 @@ const styles = StyleSheet.create({
         fontFamily: "Roboto-Regular",
         fontSize: 16,
         marginLeft: 6,
+    },
+    locationBtn: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    location: {
+        color: '#000',
+        fontFamily: "Roboto-Regular",
+        fontSize: 16,
+        textDecorationLine: 'underline'
     }
 })
