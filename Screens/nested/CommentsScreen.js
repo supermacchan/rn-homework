@@ -17,6 +17,8 @@ import { AntDesign } from "@expo/vector-icons";
 
 export const CommentsScreen = () => {
     const [isKeyboardShown, setIsKeyboardShown] = useState(false);
+    const [isFocused, setIsFocused] = useState(false);
+    const [comment, setComment] = useState('');
 
     const hideKeyboard = () => {
         setIsKeyboardShown(false);
@@ -47,6 +49,31 @@ export const CommentsScreen = () => {
                         <FlatList>
                             {/* Тут будут рендериться комменты */}
                         </FlatList>
+                        {/* New comment input */}
+                        <TextInput
+                            style={{
+                                ...styles.input,
+                                backgroundColor: isFocused ? '#fff' : '#E8E8E8',
+                                borderColor: isFocused ? '#FF6C00' : 'transparent'
+                            }}
+                                placeholder='Комментировать...'
+                                placeholderTextColor='#BDBDBD'
+                                onFocus={() => {
+                                    setIsFocused(true);
+                                    setIsKeyboardShown(true);
+                                }}
+                                onBlur={() => { setIsFocused(false) }}
+                                onChangeText={text => setComment(text)}
+                                value={comment}
+                        />
+                        {/* Кнопка регистрации */}
+                        <TouchableOpacity
+                            activeOpacity={0.8}
+                            style={styles.button}
+                            // onPress={handleFormSubmit}
+                        >
+                            <AntDesign name="arrowup" size={24} color="#fff" />
+                        </TouchableOpacity>
                     </View>
                 </KeyboardAvoidingView>
             </View>
@@ -78,5 +105,26 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         borderRadius: 8
+    },
+    input: {
+        marginBottom: 16,
+        padding: 16,
+        backgroundColor: '#E8E8E8',
+        height: 50,
+        borderRadius: 100,
+        color: "#212121",
+        borderWidth: 1,
+        borderColor: 'transparent',
+        fontSize: 16,
+        fontFamily: "Roboto-Regular",
+    },
+    button: {
+        backgroundColor: '#FF6C00',
+        borderRadius: 100,
+        marginTop: 59,
+        marginBottom: 16,
+        padding: 16,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 })
