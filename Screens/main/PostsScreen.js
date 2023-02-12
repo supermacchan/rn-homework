@@ -14,7 +14,11 @@ export const PostsScreen = () => {
             <View style={styles.profileContainer}>
                 {/* Image Container */}
                 <View style={styles.imgContainer}>
-                    <Image />
+                    <Image
+                        style={styles.image}
+                        source={require('../../assets/test-avatar.jpg')}
+                        objectFit='cover'
+                    />
                 </View>
                 {/* Text Container */}
                 <Text style={styles.name}>ИМЯ</Text>
@@ -47,6 +51,11 @@ const styles = StyleSheet.create({
         width: 60,
         height: 60,
         borderRadius: 16,
+    },
+    image: {
+        width: '100%',
+        height: '100%',
+        borderRadius: 8
     },
     name: {
 
