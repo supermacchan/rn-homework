@@ -4,10 +4,6 @@ import {
     ImageBackground,
     Text,
     Pressable,
-    KeyboardAvoidingView,
-    Platform,
-    Keyboard,
-    TouchableWithoutFeedback,
     FlatList
 } from 'react-native';
 import { useState } from 'react';
@@ -16,58 +12,42 @@ import { SinglePost } from "../../Components/SinglePost";
 
 export const ProfileScreen = () => {
     const [avatar, setAvatar] = useState(null);
-    const [isKeyboardShown, setIsKeyboardShown] = useState(false);
-
-    const hideKeyboard = () => {
-        setIsKeyboardShown(false);
-        Keyboard.dismiss();
-    };
 
     return (
-        <TouchableWithoutFeedback onPress={hideKeyboard}>
-            <View style={styles.container}>
-                <ImageBackground
-                    style={styles.background}
-                    source={require("../../assets/background.jpg")}
-                >
-                    <KeyboardAvoidingView
-                        behavior={Platform.OS == 'ios' ? 'padding' : ''}
-                    >
-                        {/* Profile Container */}
-                        <View style={{
-                            ...styles.profile,
-                            paddingBottom: isKeyboardShown ? 0 : 45,
-                            marginBottom: isKeyboardShown ? -120 : 0,
-                        }}>
-                            {/* Контейнер для аватарки */}
-                            <View style={styles.avatar}>
-                                {/* <Image /> */}
-                            </View>
-                            {/* Кнопка добавить / удалить аватарку */}
-                            {!avatar ? (
-                                <Pressable style={styles.avatarBtn} >
-                                    <Text style={styles.addAvatar}>
-                                        <AntDesign name="plus" size={20} color="#FF6C00" />
-                                    </Text>
-                                </Pressable>
-                            ) : (
-                                <Pressable style={styles.avatarBtn} >
-                                    <Text style={styles.delAvatar}>
-                                        <AntDesign name="close" size={20} color="#BDBDBD" />
-                                    </Text>
-                                </Pressable>
-                            )}
-                            <Text style={styles.title}>Name Shalala</Text>
-                            {/* Here for the testing */}
-                            <SinglePost />
-                            <FlatList>
-                                {/* Тут будут рендериться посты */}
-                            </FlatList>
-                        </View>
-                    </KeyboardAvoidingView>
-                </ImageBackground>
-            </View>
-        </TouchableWithoutFeedback>
+        <View style={styles.container}>
+            <ImageBackground
+                style={styles.background}
+                source={require("../../assets/background.jpg")}
+            >
+                {/* Profile Container */}
+                <View style={styles.profile}>
+                    {/* Контейнер для аватарки */}
+                    <View style={styles.avatar}>
+                        {/* <Image /> */}
+                    </View>
+                    {/* Кнопка добавить / удалить аватарку */}
+                    {!avatar ? (
+                        <Pressable style={styles.avatarBtn} >
+                            <Text style={styles.addAvatar}>
+                                <AntDesign name="plus" size={20} color="#FF6C00" />
+                            </Text>
+                        </Pressable>
+                        ) : (
+                        <Pressable style={styles.avatarBtn} >
+                            <Text style={styles.delAvatar}>
+                                <AntDesign name="close" size={20} color="#BDBDBD" />
+                            </Text>
+                        </Pressable>
+                    )}
+                    <Text style={styles.title}>Name Shalala</Text>
+                    {/* Here for the testing */}
+                    <SinglePost />
+                    <FlatList>
+                        {/* Тут будут рендериться посты */}
+                    </FlatList>
+                </View>
+            </ImageBackground>
+        </View>
     )
 };
 
