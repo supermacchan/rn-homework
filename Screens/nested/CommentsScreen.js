@@ -1,7 +1,6 @@
 import {
     StyleSheet,
     View,
-    ImageBackground,
     Text,
     TextInput,
     TouchableOpacity, 
@@ -10,6 +9,8 @@ import {
     Platform,
     Keyboard,
     TouchableWithoutFeedback,
+    Image,
+    FlatList
 } from 'react-native';
 import { useState } from 'react';
 import { AntDesign } from "@expo/vector-icons";
@@ -34,7 +35,18 @@ export const CommentsScreen = () => {
                             paddingBottom: isKeyboardShown ? 0 : 45,
                             marginBottom: isKeyboardShown ? -120 : 0,
                     }}>
-                        
+                        {/* Image container */}
+                        <View style={styles.imgContainer}>
+                            <Image
+                                style={styles.image}
+                                source={require('../../assets/test-post.jpg')}
+                                objectFit='cover'
+                            />
+                        </View>
+                        {/* Comments section */}
+                        <FlatList>
+                            {/* Тут будут рендериться посты */}
+                        </FlatList>
                     </View>
                 </KeyboardAvoidingView>
             </View>
@@ -54,5 +66,17 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
         backgroundColor: '#fff',
+    },
+    imgContainer: {
+        marginTop: 32,
+        marginBottom: 32,
+        height: 240,
+        backgroundColor: '#E8E8E8',
+        borderRadius: 8
+    },
+    image: {
+        width: '100%',
+        height: '100%',
+        borderRadius: 8
     },
 })
