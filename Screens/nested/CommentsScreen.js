@@ -52,8 +52,8 @@ export const CommentsScreen = () => {
                         <TextInput
                             style={{
                                 ...styles.input,
-                                backgroundColor: isFocused ? '#fff' : '#E8E8E8',
-                                borderColor: isFocused ? '#FF6C00' : 'transparent'
+                                backgroundColor: isFocused ? '#fff' : '#F6F6F6',
+                                borderColor: isFocused ? '#FF6C00' : '#E8E8E8'
                             }}
                                 placeholder='Комментировать...'
                                 placeholderTextColor='#BDBDBD'
@@ -106,15 +106,13 @@ const styles = StyleSheet.create({
         borderRadius: 8
     },
     input: {
-        padding: 16,
+        paddingHorizontal: 16,
         backgroundColor: '#F6F6F6',
         height: 50,
         borderWidth: 1,
         borderColor: '#E8E8E8',
         borderRadius: 100,
         color: "#212121",
-        borderWidth: 1,
-        borderColor: 'transparent',
         fontSize: 16,
         fontFamily: "Roboto-Regular",
     },
