@@ -16,7 +16,8 @@ import { AntDesign } from "@expo/vector-icons";
 export const CommentsScreen = () => {
     const [isKeyboardShown, setIsKeyboardShown] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
-    const [comment, setComment] = useState('');
+    const [inputValue, setInputValue] = useState('');
+    const [comments, setComments] = useState([]);
 
     const hideKeyboard = () => {
         setIsKeyboardShown(false);
@@ -61,8 +62,8 @@ export const CommentsScreen = () => {
                                     setIsKeyboardShown(true);
                                 }}
                                 onBlur={() => { setIsFocused(false) }}
-                                onChangeText={text => setComment(text)}
-                                value={comment}
+                                onChangeText={text => setInputValue(text)}
+                                value={inputValue}
                         />
                         {/* Кнопка регистрации */}
                         <TouchableOpacity
@@ -106,8 +107,10 @@ const styles = StyleSheet.create({
     },
     input: {
         padding: 16,
-        backgroundColor: '#E8E8E8',
+        backgroundColor: '#F6F6F6',
         height: 50,
+        borderWidth: 1,
+        borderColor: '#E8E8E8',
         borderRadius: 100,
         color: "#212121",
         borderWidth: 1,
