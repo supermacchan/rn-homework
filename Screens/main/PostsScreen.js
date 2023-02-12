@@ -21,8 +21,10 @@ export const PostsScreen = () => {
                     />
                 </View>
                 {/* Text Container */}
-                <Text style={styles.name}>ИМЯ</Text>
-                <Text style={styles.email}>EMAIL</Text>
+                <View style={styles.textContainer}>
+                    <Text style={styles.name}>Name Shalala</Text>
+                    <Text style={styles.email}>shalala@email.com</Text>
+                </View>
             </View>
             <SinglePost />
             <FlatList>
@@ -52,15 +54,23 @@ const styles = StyleSheet.create({
         height: 60,
         borderRadius: 16,
     },
+    textContainer: {
+        marginLeft: 8
+    },
     image: {
         width: '100%',
         height: '100%',
-        borderRadius: 8
+        borderRadius: 16
     },
     name: {
-
+        fontFamily: "Roboto-Bold",
+        fontSize: 13,
+        color: '#212121'
     },
     email: {
-
+        fontFamily: "Roboto-Regular",
+        fontSize: 13,
+        color: '#212121',
+        opacity: 0.8
     }
 })

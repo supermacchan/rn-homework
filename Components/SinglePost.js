@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: "Roboto-Medium",
         fontSize: 16,
-        color: '#000',
+        color: '#212121',
         marginTop: 8,
     },
     links: {
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     location: {
-        color: '#000',
+        color: '#212121',
         fontFamily: "Roboto-Regular",
         fontSize: 16,
         textDecorationLine: 'underline'
