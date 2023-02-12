@@ -10,12 +10,13 @@ import { SinglePost } from "../../Components/SinglePost";
 export const PostsScreen = () => {
     return (
         <View style={styles.container}>
-            {/* Профиль */}
+            {/* Profile Container */}
             <View style={styles.profileContainer}>
-                {/* контейнер для аватарки */}
+                {/* Image Container */}
                 <View style={styles.imgContainer}>
                     <Image />
                 </View>
+                {/* Text Container */}
                 <Text style={styles.name}>ИМЯ</Text>
                 <Text style={styles.email}>EMAIL</Text>
             </View>
@@ -37,8 +38,9 @@ const styles = StyleSheet.create({
     profileContainer: {
         backgroundColor: '#fff',
         paddingHorizontal: 16,
-        marginTop: 32
-        // flexDirection: 'row',
+        marginTop: 32,
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     imgContainer: {
         backgroundColor: '#E8E8E8',
