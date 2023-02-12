@@ -34,7 +34,7 @@ export const CommentsScreen = () => {
                     {/* Comments section container */}
                     <View style={{
                             ...styles.section,
-                            paddingBottom: isKeyboardShown ? 0 : 45,
+                            paddingBottom: isKeyboardShown ? 0 : 16,
                             marginBottom: isKeyboardShown ? -120 : 0,
                     }}>
                         {/* Image container */}
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     },
     section: {
         paddingTop: 32,
-        paddingBottom: 45,
+        paddingBottom: 16,
         paddingHorizontal: 16,
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
@@ -107,7 +107,6 @@ const styles = StyleSheet.create({
         borderRadius: 8
     },
     input: {
-        marginBottom: 16,
         padding: 16,
         backgroundColor: '#E8E8E8',
         height: 50,
@@ -123,6 +122,8 @@ const styles = StyleSheet.create({
         width: 34,
         height: 34,
         borderRadius: 17,
+        marginTop: -42,
+        marginRight: 8,
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'flex-end'
