@@ -1,10 +1,8 @@
 import {
     StyleSheet,
     View,
-    Text,
     TextInput,
     TouchableOpacity, 
-    Pressable,
     KeyboardAvoidingView,
     Platform,
     Keyboard,
