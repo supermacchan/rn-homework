@@ -202,6 +202,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#FF6C00',
         textAlign: 'center',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     delAvatar: {
         backgroundColor: '#fff',
@@ -209,6 +211,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#BDBDBD',
         textAlign: 'center',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     title: {
         marginBottom: 33,

@@ -10,6 +10,7 @@ import { RegistrationScreen } from './Screens/auth/RegistrationScreen';
 import { LoginScreen } from './Screens/auth/LoginScreen';
 import { CreatePostsScreen } from './Screens/main/CreatePostsScreen';
 import { PostsScreen } from './Screens/main/PostsScreen';
+import { ProfileScreen } from './Screens/main/ProfileScreen';
 
 const fonts = {
   "Roboto-Regular": require("./assets/fonts/Roboto/Roboto-Regular.ttf"),
@@ -44,7 +45,8 @@ export default function App() {
       {/* <RegistrationScreen /> */}
       {/* <LoginScreen /> */}
       {/* <CreatePostsScreen /> */}
-      <PostsScreen />
+      {/* <PostsScreen /> */}
+      <ProfileScreen />
 
       <StatusBar style="auto" />
     </View>
