@@ -19,6 +19,7 @@ export const PostsScreen = () => {
                 <Text style={styles.name}>ИМЯ</Text>
                 <Text style={styles.email}>EMAIL</Text>
             </View>
+            <SinglePost />
             <FlatList>
                 <SinglePost />
                 {/* Тут будут рендериться посты */}
@@ -35,6 +36,8 @@ const styles = StyleSheet.create({
     },
     profileContainer: {
         backgroundColor: '#fff',
+        paddingHorizontal: 16,
+        marginTop: 32
         // flexDirection: 'row',
     },
     imgContainer: {
