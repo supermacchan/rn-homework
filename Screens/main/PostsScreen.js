@@ -26,9 +26,9 @@ export const PostsScreen = () => {
                     <Text style={styles.email}>shalala@email.com</Text>
                 </View>
             </View>
+            {/* Here for the testing */}
             <SinglePost />
             <FlatList>
-                <SinglePost />
                 {/* Тут будут рендериться посты */}
             </FlatList>
         </View>
