@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { useState } from 'react';
 import { AntDesign } from "@expo/vector-icons";
+import { SingleComment } from '../../Components/SingleComment';
 
 export const CommentsScreen = () => {
     const [isKeyboardShown, setIsKeyboardShown] = useState(false);
@@ -45,6 +46,7 @@ export const CommentsScreen = () => {
                             />
                         </View>
                         {/* Comments section */}
+                        <SingleComment />
                         <FlatList>
                             {/* Тут будут рендериться комменты */}
                         </FlatList>
@@ -106,6 +108,7 @@ const styles = StyleSheet.create({
         borderRadius: 8
     },
     input: {
+        marginTop: 16,
         paddingHorizontal: 16,
         backgroundColor: '#F6F6F6',
         height: 50,
