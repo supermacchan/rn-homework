@@ -120,11 +120,11 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: '#FF6C00',
-        borderRadius: 100,
-        marginTop: 59,
-        marginBottom: 16,
-        padding: 16,
+        width: 34,
+        height: 34,
+        borderRadius: 17,
         justifyContent: 'center',
         alignItems: 'center',
+        alignSelf: 'flex-end'
     },
 })
