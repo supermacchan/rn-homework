@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { useState } from 'react';
 import { AntDesign } from "@expo/vector-icons";
+import { SinglePost } from "../../Components/SinglePost";
 
 export const ProfileScreen = () => {
     const [avatar, setAvatar] = useState(null);
@@ -57,6 +58,8 @@ export const ProfileScreen = () => {
                                 </Pressable>
                             )}
                             <Text style={styles.title}>Name Shalala</Text>
+                            {/* Here for the testing */}
+                            <SinglePost />
                             <FlatList>
                                 {/* Тут будут рендериться посты */}
                             </FlatList>

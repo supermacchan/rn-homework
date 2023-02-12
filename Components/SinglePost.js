@@ -40,7 +40,6 @@ export const SinglePost = () => {
 
 const styles = StyleSheet.create({
     post: {
-        paddingHorizontal: 16,
         marginTop: 32
     },
     imgContainer: {

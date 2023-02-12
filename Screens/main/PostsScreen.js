@@ -40,10 +40,10 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         paddingTop: 32,
+        paddingHorizontal: 16,
     },
     profileContainer: {
         backgroundColor: '#fff',
-        paddingHorizontal: 16,
         marginTop: 32,
         flexDirection: 'row',
         alignItems: 'center'
