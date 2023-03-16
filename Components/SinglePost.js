@@ -9,7 +9,6 @@ import { EvilIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
 export const SinglePost = ({ navigation }) => {
-    console.log(navigation);
     return (
         <View style={styles.post}>
             {/* Image container */}

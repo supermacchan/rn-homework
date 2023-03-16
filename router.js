@@ -5,7 +5,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-import { MaterialIcons } from '@expo/vector-icons'; 
 
 const AuthStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
@@ -57,21 +56,7 @@ export const useRoute = (isAuth) => {
     >
       <MainTab.Screen
         options={{
-            headerShown: true,
-            title: "Публикации",
-            headerTitleStyle: {
-                fontSize: 17,
-                fontFamily: 'Roboto-Medium',
-                color: '#212121',
-            },
-            headerStyle: {
-                borderBottomWidth: 0.3,
-                borderBottomColor: '#B3B3B3',
-            },
-            headerTitleAlign: 'center',
-            headerRight: ({ focused, size, color }) => (
-                <Pressable style={{paddingRight: 15}}><MaterialIcons name="logout" size={24} color='#BDBDBD' /></Pressable>
-            ),
+            headerShown: false,
             tabBarIcon: ({ focused, size, color }) => (
                 <SimpleLineIcons name="grid" size={24} color={color} />
             ),

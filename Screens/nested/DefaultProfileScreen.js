@@ -11,7 +11,6 @@ import { AntDesign } from "@expo/vector-icons";
 import { SinglePost } from "../../Components/SinglePost";
 
 export const DefaultProfileScreen = ({ navigation }) => {
-    console.log(navigation);
     const [avatar, setAvatar] = useState(null);
 
     return (
