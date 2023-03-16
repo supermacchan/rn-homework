@@ -10,10 +10,10 @@ import {
     TextInput,
     TouchableOpacity,
 } from "react-native";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AntDesign } from '@expo/vector-icons'; 
 
-export const CreatePostsScreen = () => {
+export const CreatePostsScreen = ({ navigation }) => {
     const [isKeyboardShown, setIsKeyboardShown] = useState(false);
 
     const hideKeyboard = () => {

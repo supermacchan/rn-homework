@@ -10,15 +10,32 @@ import {
     Image,
     FlatList
 } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AntDesign } from "@expo/vector-icons";
 import { SingleComment } from '../../Components/SingleComment';
 
-export const CommentsScreen = () => {
+export const CommentsScreen = ({ navigation }) => {
     const [isKeyboardShown, setIsKeyboardShown] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const [comments, setComments] = useState([]);
+
+    useEffect(() => {
+        navigation.getParent()?.setOptions({
+        tabBarStyle: {
+            display: "none"
+        }
+        });
+        return () => navigation.getParent()?.setOptions({
+        tabBarStyle: {
+          paddingTop: 9,
+          justifyContent: "center",
+          paddingLeft: 82,
+          paddingRight: 82,
+          paddingBottom: 47,
+        }
+        });
+    }, [navigation]);
 
     const hideKeyboard = () => {
         setIsKeyboardShown(false);
@@ -108,6 +125,9 @@ const styles = StyleSheet.create({
         borderRadius: 8
     },
     input: {
+        // position: 'absolute',
+        // bottom: 0,
+        // left: 0,
         marginTop: 16,
         paddingHorizontal: 16,
         backgroundColor: '#F6F6F6',

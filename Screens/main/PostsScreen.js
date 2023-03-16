@@ -87,7 +87,12 @@ const NestedScreen = createStackNavigator();
 
 export const PostsScreen = ({ navigation }) => {
   return (
-    <NestedScreen.Navigator initialRouteName="Posts">
+      <NestedScreen.Navigator
+          initialRouteName="Posts"
+          screenOptions={{
+
+          }}
+      >
       <NestedScreen.Screen
         name="DefaultScreen"
         component={DefaultPostsScreen}
@@ -114,12 +119,18 @@ export const PostsScreen = ({ navigation }) => {
       <NestedScreen.Screen
         name="Map"
         component={MapScreen}
-        options={{ headerTitleAlign: 'center' }}
+        options={{
+            headerTitle: 'Карта',
+            headerTitleAlign: 'center'
+        }}
       />
       <NestedScreen.Screen
         name="Comments"
         component={CommentsScreen}
-        options={{ headerTitleAlign: 'center' }}
+        options={{
+            headerTitle: 'Комментарии',
+            headerTitleAlign: 'center',
+            }}
       />
     </NestedScreen.Navigator>
   );

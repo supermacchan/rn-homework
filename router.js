@@ -77,13 +77,18 @@ export const useRoute = (isAuth) => {
                 borderBottomWidth: 0.3,
                 borderBottomColor: '#B3B3B3',
             },
-            headerTitleAlign: 'center',
+          headerTitleAlign: 'center',
+            // headerBackVisible: true,
             headerLeft: ({ focused, size, color }) => (
-                <Pressable style={{paddingLeft: 15}}><AntDesign name="arrowleft" size={24} color="#212121" /></Pressable>
+              <Pressable
+                style={{ paddingLeft: 15 }}
+              >
+                <AntDesign name="arrowleft" size={24} color="#212121" />
+              </Pressable>
             ),
-          tabBarIcon: ({ focused, size, color }) => (
-            <AntDesign name="plus" size={24} color={color} />
-          ),
+            tabBarIcon: ({ focused, size, color }) => (
+              <AntDesign name="plus" size={24} color={color} />
+            ),
         }}
         name="Создать публикацию"
         component={CreatePostsScreen}
