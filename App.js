@@ -12,6 +12,7 @@ import { CreatePostsScreen } from './Screens/main/CreatePostsScreen';
 import { PostsScreen } from './Screens/main/PostsScreen';
 import { ProfileScreen } from './Screens/main/ProfileScreen';
 import { CommentsScreen } from './Screens/nested/CommentsScreen';
+import { Home } from './Screens/main/Home';
 
 const fonts = {
   "Roboto-Regular": require("./assets/fonts/Roboto/Roboto-Regular.ttf"),
@@ -48,7 +49,8 @@ export default function App() {
       {/* <CreatePostsScreen /> */}
       {/* <PostsScreen /> */}
       {/* <ProfileScreen /> */}
-      <CommentsScreen />
+      {/* <CommentsScreen /> */}
+      <Home />
 
       <StatusBar style="auto" />
     </View>
