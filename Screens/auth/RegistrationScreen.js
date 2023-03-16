@@ -14,7 +14,7 @@ import {
 import { useState } from 'react';
 import { AntDesign } from "@expo/vector-icons";
 
-export const RegistrationScreen = () => {
+export const RegistrationScreen = ({ navigation }) => {
     const [avatar, setAvatar] = useState(null);
     const [login, setLogin] = useState('');
     const [email, setEmail] = useState('');
@@ -152,7 +152,7 @@ export const RegistrationScreen = () => {
                                 <Text style={styles.btnTitle}>Зарегистрироваться</Text>
                             </TouchableOpacity>
                             {/* ссылка перехода на страницу логина */}
-                            <Pressable style={styles.loginNav} >
+                            <Pressable style={styles.loginNav} onPress={() => navigation.navigate("Login")} >
                                 <Text style={styles.loginNavText}>Уже есть аккаунт? Войти</Text>
                             </Pressable>
                         </View>

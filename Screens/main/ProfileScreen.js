@@ -83,6 +83,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginTop: -39,
         marginRight: -119.5,
+        backgroundColor: '#fff',
+        borderRadius: 25,
     },
     addAvatar: {
         backgroundColor: '#fff',

@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import { useState } from 'react';
 
-export const LoginScreen = () => {
+export const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isEmailFocused, setIsEmailFocused] = useState(false);
@@ -111,7 +111,7 @@ export const LoginScreen = () => {
                                 <Text style={styles.btnTitle}>Войти</Text>
                             </TouchableOpacity>
                             {/* ссылка перехода на страницу логина */}
-                            <Pressable style={styles.authNav} >
+                            <Pressable style={styles.authNav} onPress={() => navigation.navigate("Registration")} >
                                 <Text style={styles.authNavText}>Нет аккаунта? Зарегистрироваться</Text>
                             </Pressable>
                         </View>
@@ -126,6 +126,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+        paddingBottom: 90
     },
     background: {
         flex: 1,

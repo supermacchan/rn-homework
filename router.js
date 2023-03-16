@@ -39,6 +39,7 @@ export const useRoute = (isAuth) => {
   }
   return (
     <MainTab.Navigator
+      initialRouteName="PostsScreen"
       screenOptions={{
         tabBarActiveTintColor: "#FFFFFF",
         tabBarShowLabel: false,
