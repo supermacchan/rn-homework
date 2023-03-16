@@ -6,12 +6,6 @@ import {
 import { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import * as SplashScreen from "expo-splash-screen";
-import { RegistrationScreen } from './Screens/auth/RegistrationScreen';
-import { LoginScreen } from './Screens/auth/LoginScreen';
-import { CreatePostsScreen } from './Screens/main/CreatePostsScreen';
-import { PostsScreen } from './Screens/main/PostsScreen';
-import { ProfileScreen } from './Screens/main/ProfileScreen';
-import { CommentsScreen } from './Screens/nested/CommentsScreen';
 import { Home } from './Screens/main/Home';
 
 const fonts = {
@@ -44,14 +38,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {/* <RegistrationScreen /> */}
-      {/* <LoginScreen /> */}
-      {/* <CreatePostsScreen /> */}
-      {/* <PostsScreen /> */}
-      {/* <ProfileScreen /> */}
-      {/* <CommentsScreen /> */}
       <Home />
-
       <StatusBar style="auto" />
     </View>
   );

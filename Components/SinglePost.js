@@ -8,7 +8,8 @@ import {
 import { EvilIcons } from '@expo/vector-icons'; 
 import { AntDesign } from '@expo/vector-icons';
 
-export const SinglePost = () => {
+export const SinglePost = ({ navigation }) => {
+    console.log(navigation);
     return (
         <View style={styles.post}>
             {/* Image container */}
@@ -24,12 +25,12 @@ export const SinglePost = () => {
             {/* Comments-Location section */}
             <View style={styles.links}>
                 {/* Comments Button */}
-                <Pressable style={styles.commentsBtn}>
+                <Pressable style={styles.commentsBtn} onPress={() => navigation.navigate("Comments")} >
                     <EvilIcons name="comment" size={24} color="#BDBDBD" />
                     <Text style={styles.comments}>000</Text>
                 </Pressable>
                 {/* Location Button */}
-                <Pressable style={styles.locationBtn}>
+                <Pressable style={styles.locationBtn} onPress={() => navigation.navigate("Map")}>
                     <AntDesign name="enviromento" size={24} color="#BDBDBD" />
                     <Text style={styles.location}>Локация</Text>
                 </Pressable>
