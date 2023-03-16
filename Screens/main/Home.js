@@ -3,7 +3,7 @@ import { useRoute } from "../../router";
 
 export const Home = () => {
 
-    const routing = useRoute(true);
+    const routing = useRoute(false);
     // будем передавать значение авторизации из стейта
 
   return <NavigationContainer>{routing}</NavigationContainer>;

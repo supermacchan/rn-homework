@@ -31,6 +31,7 @@ export const LoginScreen = ({ navigation }) => {
 
     const handleFormSubmit = () => {
         console.log(`Авторизация, адрес электронной почты: ${email}, пароль: ${password}`);
+        // при сабмите будем задавать в сторе значение авторизации true и передавать его в Home для рендера основных страниц
         valueReset();
         hideKeyboard();
     };
