@@ -153,7 +153,7 @@ export const CreatePostsScreen = ({ navigation }) => {
                         paddingBottom: isKeyboardShown ? 0 : 45,
                         marginBottom: isKeyboardShown ? -120 : 0,
                     }}>
-                        {/* Image container */}
+                        {/* old Image container (temp) */}
                         {/* <View style={styles.imgContainer}> */}
                             {/* <Image /> */}
                             {/* <Pressable style={styles.addImgBtn}>
