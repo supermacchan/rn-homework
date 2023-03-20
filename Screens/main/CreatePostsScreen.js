@@ -137,7 +137,7 @@ export const CreatePostsScreen = ({ navigation }) => {
             });
             return;
         }
-            navigation.navigate('DefaultScreen');
+            navigation.navigate('PostsScreen');
             resetPhotoState();
             setTitle('');
             setLocation('');
