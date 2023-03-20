@@ -8,10 +8,25 @@ import {
 } from 'react-native';
 import { useState } from 'react';
 import { AntDesign } from "@expo/vector-icons";
+import * as ImagePicker from 'expo-image-picker';
 import { SinglePost } from "../../Components/SinglePost";
 
 export const DefaultProfileScreen = ({ navigation }) => {
     const [avatar, setAvatar] = useState(null);
+
+    const pickAvatar = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setAvatar(result.assets[0].uri);
+    }
+  };
 
     return (
         <View style={styles.container}>
@@ -27,13 +42,13 @@ export const DefaultProfileScreen = ({ navigation }) => {
                     </View>
                     {/* Кнопка добавить / удалить аватарку */}
                     {!avatar ? (
-                        <Pressable style={styles.avatarBtn} >
+                        <Pressable style={styles.avatarBtn} onPress={pickAvatar}>
                             <Text style={styles.addAvatar}>
                                 <AntDesign name="plus" size={20} color="#FF6C00" />
                             </Text>
                         </Pressable>
                         ) : (
-                        <Pressable style={styles.avatarBtn} >
+                        <Pressable style={styles.avatarBtn} onPress={() => setAvatar(null) } >
                             <Text style={styles.delAvatar}>
                                 <AntDesign name="close" size={20} color="#BDBDBD" />
                             </Text>
