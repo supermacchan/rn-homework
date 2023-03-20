@@ -9,16 +9,138 @@ import {
     Text,
     TextInput,
     TouchableOpacity,
+    Button,
+    Image
 } from "react-native";
 import { useState, useEffect } from 'react';
+import { Camera, CameraType } from 'expo-camera';
+import * as Location from 'expo-location';
+import * as ImagePicker from 'expo-image-picker';
+import Toast from 'react-native-toast-message';
 import { AntDesign } from '@expo/vector-icons'; 
+import { MaterialIcons } from '@expo/vector-icons';
 
 export const CreatePostsScreen = ({ navigation }) => {
     const [isKeyboardShown, setIsKeyboardShown] = useState(false);
+    const [type, setType] = useState(CameraType.back);
+    const [permission, requestPermission] = Camera.useCameraPermissions();
+    const [cameraRef, setCameraRef] = useState(null);
+    const [photo, setPhoto] = useState(null);
+    const [title, setTitle] = useState('');
+    const [location, setLocation] = useState(null);
+    const [coords, setCoords] = useState(null);
+    const [country, setCountry] = useState(null);
+
+    useEffect(() => {
+        (async () => {
+            await Location.requestForegroundPermissionsAsync();
+        })();
+
+        const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+            setIsKeyboardShown(true);
+        });
+
+        const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+            setIsKeyboardShown(false);
+        });
+
+        (async () => {
+            const location = await Location.getCurrentPositionAsync();
+            setCoords(location);
+        })();
+
+        return () => {
+            showSubscription.remove();
+            hideSubscription.remove();
+        };
+    }, []);
 
     const hideKeyboard = () => {
         setIsKeyboardShown(false);
         Keyboard.dismiss();
+    };
+
+    if (!permission) {
+        // Camera permissions are still loading
+        return <View />;
+    }
+
+    if (!permission.granted) {
+        // Camera permissions are not granted yet
+        return (
+        <View style={styles.container}>
+            <Text style={{ textAlign: 'center' }}>
+            We need your permission to show the camera
+            </Text>
+            <Button onPress={requestPermission} title="grant permission" />
+        </View>
+        );
+    }
+
+    const pickImage = async () => {
+        try {
+            await getAddress();
+            let result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.All,
+                allowsEditing: true,
+                aspect: [4, 3],
+                quality: 1,
+            });
+
+            if (!result.canceled) {
+                setPhoto(result.assets[0].uri);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };   
+
+    const toggleCameraType = () => {
+        setType(current =>
+        current === CameraType.back ? CameraType.front : CameraType.back
+        );
+    };
+
+    async function getAddress() {
+        try {
+            const address = await Location.reverseGeocodeAsync({
+                latitude: coords.coords.latitude,
+                longitude: coords.coords.longitude,
+            });
+            setLocation(`${address[0].city}, ${address[0].country}`);
+            setCountry(address[0].country);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const takePhoto = async () => {
+        try {
+            const photo = await cameraRef.takePictureAsync();
+            setPhoto(photo.uri);
+            getAddress();
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const resetPhotoState = () => {
+        setPhoto(null);
+        setLocation('');
+    };
+
+    const onSubmit = async () => {
+        if (photo === null && location === '') {
+            Toast.show({
+                type: 'error',
+                text1: 'There are must be photo and title',
+            });
+            return;
+        }
+            navigation.navigate('DefaultScreen');
+            resetPhotoState();
+            setTitle('');
+            setLocation('');
     };
 
     return (
@@ -32,24 +154,71 @@ export const CreatePostsScreen = ({ navigation }) => {
                         marginBottom: isKeyboardShown ? -120 : 0,
                     }}>
                         {/* Image container */}
-                        <View style={styles.imgContainer}>
+                        {/* <View style={styles.imgContainer}> */}
                             {/* <Image /> */}
-                            <Pressable style={styles.addImgBtn}>
+                            {/* <Pressable style={styles.addImgBtn}>
                                 <AntDesign name="camera" size={24} color="#BDBDBD" />
                             </Pressable>
                         </View>
                         <Pressable>
-                            <Text style={styles.addImage}>Загрузите фото</Text>
-                        </Pressable>
-                        {/* <Pressable>
-                            <Text style={styles.addImage}>Редактировать фото</Text>
+                            <Text style={styles.addImage}>
+                                {photo ? "Загрузите фото" : "Редактировать фото"}
+                            </Text>
                         </Pressable> */}
+
+                        {photo ? (
+                            <View style={styles.imgContainer}>
+                                <Image
+                                    style={{
+                                        width: '100%',
+                                        height: 240,
+                                        backgroundColor: '#F6F6F6',
+                                        borderRadius: 8,
+                                    }}
+                                    source={{ uri: photo }}
+                                />
+                                <Pressable style={styles.addImgBtn} onPress={resetPhotoState}>
+                                    <AntDesign name="camera" size={24} color="#BDBDBD" />
+                                </Pressable>
+                            </View>
+                        ) : (
+                            <Camera
+                                style={styles.camera}
+                                type={type}
+                                ref={ref => setCameraRef(ref)}
+                            >
+                                <Pressable style={styles.addImgBtn} onPress={takePhoto}>
+                                    <AntDesign name="camera" size={24} color="#BDBDBD" />
+                                </Pressable>
+                                
+                                <View style={{ position: 'absolute', right: 10, bottom: 10 }}>
+                                    <TouchableOpacity onPress={toggleCameraType}>
+                                        <MaterialIcons
+                                            name="flip-camera-android"
+                                            size={24}
+                                            color="#BDBDBD"
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                            </Camera>
+                        )}
+
+                        <Pressable onPress={pickImage}>
+                            <Text style={styles.addImage}>
+                                {photo ? "Загрузите фото" : "Редактировать фото"}
+                            </Text>
+                        </Pressable>
+
                         <TextInput
+                            value={title}
+                            onChangeText={text => setTitle(text)}
                             placeholder="Название..."
                             placeholderTextColor={'#BDBDBD'}
                             style={styles.postTitle}
                         />
                         <TextInput
+                            value={location}
+                            onChangeText={text => setLocation(text)}
                             placeholder="Местность..."
                             placeholderTextColor={'#BDBDBD'}
                             style={styles.postLocation}
@@ -59,6 +228,7 @@ export const CreatePostsScreen = ({ navigation }) => {
                         <TouchableOpacity
                             activeOpacity={0.8}
                             style={styles.button}
+                            onPress={onSubmit}
                         >
                             <Text style={styles.btnTitle}>Опубликовать</Text>
                         </TouchableOpacity>
@@ -92,6 +262,13 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    camera: {
+        width: '100%',
+        height: 240,
+        borderRadius: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     addImgBtn: {
         width: 60,
