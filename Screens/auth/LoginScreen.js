@@ -11,7 +11,11 @@ import {
     Keyboard,
     TouchableWithoutFeedback,
 } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { authSignInUser } from '../../redux/auth/operations';
+import Toast from 'react-native-toast-message';
+
 
 export const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -20,6 +24,22 @@ export const LoginScreen = ({ navigation }) => {
     const [isPassFocused, setIsPassFocused] = useState(false);
     const [isKeyboardShown, setIsKeyboardShown] = useState(false);
     const [isPassShown, setIsPassShown] = useState(false);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+            setIsKeyboardShown(true);
+        });
+        const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+            setIsKeyboardShown(false);
+        });
+
+        return () => {
+            showSubscription.remove();
+            hideSubscription.remove();
+        };
+    }, []);
 
     const handleSetEmail = text => setEmail(text);
     const handleSetPassword = text => setPassword(text);
@@ -30,8 +50,10 @@ export const LoginScreen = ({ navigation }) => {
     };
 
     const handleFormSubmit = () => {
-        console.log(`Авторизация, адрес электронной почты: ${email}, пароль: ${password}`);
-        // при сабмите будем задавать в сторе значение авторизации true и передавать его в Home для рендера основных страниц
+        if (email === '' && password === '') {
+            return Toast.show({ type: 'error', text1: 'Fill in all fields' });
+        }
+        dispatch(authSignInUser({ email, password }));
         valueReset();
         hideKeyboard();
     };

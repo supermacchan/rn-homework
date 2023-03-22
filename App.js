@@ -6,6 +6,8 @@ import {
 import { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import * as SplashScreen from "expo-splash-screen";
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 import { Home } from './Screens/main/Home';
 
 const fonts = {
@@ -37,10 +39,12 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <Home />
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <View style={styles.container}>
+        <Home />
+        <StatusBar style="auto" />
+      </View>
+    </Provider>
   );
 }
 
