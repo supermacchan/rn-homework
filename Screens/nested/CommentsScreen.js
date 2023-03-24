@@ -11,14 +11,26 @@ import {
     FlatList
 } from 'react-native';
 import { useState, useEffect } from 'react';
+import { db } from '../../firebase/config';
+import {
+  collection,
+  addDoc,
+  query,
+  onSnapshot,
+  orderBy,
+} from 'firebase/firestore';
+import { useSelector } from 'react-redux';
 import { AntDesign } from "@expo/vector-icons";
 import { SingleComment } from '../../Components/SingleComment';
 
-export const CommentsScreen = ({ navigation }) => {
+export const CommentsScreen = ({ navigation, route }) => {
     const [isKeyboardShown, setIsKeyboardShown] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
-    const [inputValue, setInputValue] = useState('');
-    const [comments, setComments] = useState([]);
+    const [comment, setComment] = useState('');
+    const [allComments, setAllComments] = useState([]);
+
+    const { avatar, nickname } = useSelector(state => state.auth);
+    const { photo, postId } = route.params;
 
     useEffect(() => {
         navigation.getParent()?.setOptions({
@@ -37,9 +49,56 @@ export const CommentsScreen = ({ navigation }) => {
         });
     }, [navigation]);
 
+    useEffect(() => {
+        const q = query(
+            collection(db, 'posts', postId, 'comments'),
+            orderBy('date')
+        );
+        const unsubscribe = onSnapshot(q, querySnapshot => {
+            const comments = [];
+            querySnapshot.forEach(doc => {
+                comments.push({ ...doc.data(), id: doc.id });
+            });
+            setAllComments(comments);
+        });
+
+        const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+            setIsKeyboardShown(true);
+        });
+        const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+            setIsKeyboardShown(false);
+        });
+
+        return () => {
+            unsubscribe();
+            showSubscription.remove();
+            hideSubscription.remove();
+        };
+    }, []);
+
+    const handleSetComment = text => setComment(text);
+
     const hideKeyboard = () => {
         setIsKeyboardShown(false);
         Keyboard.dismiss();
+    };
+
+    const handleSubmit = async () => {
+        if (comment === '') {
+            alert('Cannot be empty comment');
+            return; 
+        }
+        const fullDate = commentDayandTime();
+
+        await addDoc(collection(db, 'posts', postId, 'comments'), {
+            comment,
+            avatar,
+            nickname,
+            date: Date.now().toString(),
+            time: fullDate,
+        });
+        setComment('');
+        setIsKeyboardShown(false);
     };
 
     return (
@@ -63,10 +122,21 @@ export const CommentsScreen = ({ navigation }) => {
                             />
                         </View>
                         {/* Comments section */}
-                        <SingleComment />
-                        <FlatList>
-                            {/* Тут будут рендериться комменты */}
-                        </FlatList>
+                        {/* <SingleComment /> */}
+                        <SafeAreaView style={{ flex: 1, marginBottom: 20 }}>
+                            <FlatList
+                                data={allComments}
+                                renderItem={({ item }) => (
+                                    <SingleComment
+                                        avatar={item.avatar}
+                                        comment={item.comment}
+                                        nickname={item.nickname}
+                                        date={item.time}
+                                    />
+                                )}
+                                keyExtractor={item => item.id}
+                            />
+                        </SafeAreaView>
                         {/* New comment input */}
                         <TextInput
                             style={{
@@ -81,14 +151,14 @@ export const CommentsScreen = ({ navigation }) => {
                                     setIsKeyboardShown(true);
                                 }}
                                 onBlur={() => { setIsFocused(false) }}
-                                onChangeText={text => setInputValue(text)}
+                                onChangeText={handleSetComment}
                                 value={inputValue}
                         />
                         {/* Кнопка регистрации */}
                         <TouchableOpacity
                             activeOpacity={0.8}
                             style={styles.button}
-                            // onPress={handleFormSubmit}
+                            onPress={handleSubmit}
                         >
                             <AntDesign name="arrowup" size={24} color="#fff" />
                         </TouchableOpacity>

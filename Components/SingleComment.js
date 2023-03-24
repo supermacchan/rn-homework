@@ -4,39 +4,39 @@ import {
     Text,
     View
 } from 'react-native';
+import { useSelector } from 'react-redux';
 
-export const SingleComment = () => {
+export const SingleComment = ({ avatar, comment, nickname, date }) => {
+    const username = useSelector(state => state.auth.nickname);
+
     return (
-        // temporary container to test the styles
         <View>
-
-            {/* comment 1 */}
             <View
                 style={{
                     ...styles.container,
-                    flexDirection: 'row',
+                    flexDirection: username === nickname ? 'row-reverse' : 'row',
                     marginBottom: 24,
                 }}
             >
                 <View style={styles.avatarContainer}>
-                    <Image style={styles.avatar} />
+                    <Image source={{ uri: avatar }} style={styles.avatar} />
                 </View>
                     
-                <View style={styles.userComment}>
-                    <Text style={styles.text}>Comment Shalala lala lalala</Text>
+                <View style={username === nickname ? styles.userComment : styles.comment} >
+                    <Text style={styles.text}>{comment}</Text>
                     <Text
                         style={{
                             ...styles.date,
-                            textAlign: 'right',
+                            textAlign: username === nickname ? 'left' : 'right',
                         }}
                     >
-                        10 July 2020
+                        {date}
                     </Text>
                 </View>
             </View>
 
             {/* comment 2 */}
-            <View
+            {/* <View
                 style={{
                     ...styles.container,
                     flexDirection: 'row-reverse',
@@ -58,7 +58,7 @@ export const SingleComment = () => {
                     10 July 2020
                 </Text>
                 </View>
-            </View>
+            </View> */}
       </View>
   );
 };

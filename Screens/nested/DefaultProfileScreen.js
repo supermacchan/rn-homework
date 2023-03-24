@@ -6,13 +6,44 @@ import {
     Pressable,
     FlatList
 } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { db } from '../../../firebase/config';
+import {
+  collection,
+  query,
+  onSnapshot,
+  orderBy,
+  where,
+} from 'firebase/firestore';
+import { useSelector } from 'react-redux';
+import { authSingOutUser } from '../../redux/auth/operations';
+import { useDispatch } from 'react-redux';
 import { AntDesign } from "@expo/vector-icons";
 import * as ImagePicker from 'expo-image-picker';
 import { SinglePost } from "../../Components/SinglePost";
 
 export const DefaultProfileScreen = ({ navigation }) => {
-    const [avatar, setAvatar] = useState(null);
+    const [photo, setPhoto] = useState(null);
+    const [posts, setPosts] = useState([]);
+
+    const { nickname, avatar, userId } = useSelector(state => state.auth);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        setPhoto(avatar);
+        const q = query(collection(db, 'posts'), where('userId', '==', userId));
+        const unsubscribe = onSnapshot(q, querySnapshot => {
+            const allPosts = [];
+            querySnapshot.forEach(doc => {
+                allPosts.push({ ...doc.data(), id: doc.id });
+            });
+            setPosts(allPosts);
+        });
+        return () => {
+        unsubscribe();
+        };
+    }, []);
 
     const pickAvatar = async () => {
     // No permissions request is necessary for launching the image library
@@ -24,7 +55,7 @@ export const DefaultProfileScreen = ({ navigation }) => {
     });
 
     if (!result.canceled) {
-      setAvatar(result.assets[0].uri);
+      setPhoto(result.assets[0].uri);
     }
   };
 
@@ -38,25 +69,49 @@ export const DefaultProfileScreen = ({ navigation }) => {
                 <View style={styles.profile}>
                     {/* Контейнер для аватарки */}
                     <View style={styles.avatar}>
-                        {/* <Image /> */}
+                        <Image source={{ uri: photo }} style={styles.avatarImg} />
                     </View>
                     {/* Кнопка добавить / удалить аватарку */}
-                    {!avatar ? (
+                    {!photo ? (
                         <Pressable style={styles.avatarBtn} onPress={pickAvatar}>
                             <Text style={styles.addAvatar}>
                                 <AntDesign name="plus" size={20} color="#FF6C00" />
                             </Text>
                         </Pressable>
                         ) : (
-                        <Pressable style={styles.avatarBtn} onPress={() => setAvatar(null) } >
+                        <Pressable style={styles.avatarBtn} onPress={() => setPhoto(null) } >
                             <Text style={styles.delAvatar}>
                                 <AntDesign name="close" size={20} color="#BDBDBD" />
                             </Text>
                         </Pressable>
                     )}
-                    <Text style={styles.title}>Name Shalala</Text>
+                    {/* <Pressable
+                        style={styles.logoutIcon}
+                        onPress={() => dispatch(authSingOutUser())}
+                    >
+                        <MaterialIcons name="logout" size={24} color="#BDBDBD" />
+                    </Pressable> */}
+                    <Text style={styles.title}>{nickname}</Text>
                     {/* Here for the testing */}
-                    <SinglePost navigation={navigation} />
+                    {/* <SinglePost navigation={navigation} /> */}
+                    <SafeAreaView style={{ flex: 1, width: '100%', marginTop: 32 }}>
+                        <FlatList
+                            data={posts}
+                            renderItem={({ item }) => (
+                                <SinglePost
+                                    photo={item.photo}
+                                    title={item.title}
+                                    location={item.location}
+                                    navigation={navigation}
+                                    coords={item.coords}
+                                    postId={item.id}
+                                    likes={item.like}
+                                    country={item.country}
+                                />
+                            )}
+                            keyExtractor={item => item.id}
+                        />
+                    </SafeAreaView>
                     <FlatList>
                         {/* Тут будут рендериться посты */}
                     </FlatList>
@@ -100,6 +155,11 @@ const styles = StyleSheet.create({
         marginRight: -119.5,
         backgroundColor: '#fff',
         borderRadius: 25,
+    },
+    avatarImg: {
+        width: 120,
+        height: 120,
+        borderRadius: 16,
     },
     addAvatar: {
         backgroundColor: '#fff',

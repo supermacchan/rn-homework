@@ -13,6 +13,7 @@ import {
     Image
 } from "react-native";
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Camera, CameraType } from 'expo-camera';
 import * as Location from 'expo-location';
 import * as ImagePicker from 'expo-image-picker';
@@ -30,6 +31,8 @@ export const CreatePostsScreen = ({ navigation }) => {
     const [location, setLocation] = useState(null);
     const [coords, setCoords] = useState(null);
     const [country, setCountry] = useState(null);
+
+    const { userId, nickname } = useSelector(state => state.auth);
 
     useEffect(() => {
         (async () => {
@@ -129,6 +132,41 @@ export const CreatePostsScreen = ({ navigation }) => {
         setLocation('');
     };
 
+    const uploadPhoto = async () => {
+        try {
+            // Uploading photo
+            const response = await fetch(photo);
+            const file = await response.blob();
+            await uploadBytes(ref(storage, `photos/${file._data.blobId}`), file);
+            // get photo url
+            const photoUrl = await getDownloadURL(
+                ref(storage, `photos/${file._data.blobId}`)
+            );
+            return photoUrl;
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const uploadPost = async () => {
+        try {
+            const photo = await uploadPhoto();
+            console.log(photo);
+            await addDoc(collection(db, 'posts'), {
+                userId,
+                nickname,
+                photo,
+                title,
+                location,
+                coords: coords.coords,
+                date: Date.now().toString(),
+                country,
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     const onSubmit = async () => {
         if (photo === null && location === '') {
             Toast.show({
@@ -137,6 +175,7 @@ export const CreatePostsScreen = ({ navigation }) => {
             });
             return;
         }
+            await uploadPost();
             navigation.navigate('PostsScreen');
             resetPhotoState();
             setTitle('');

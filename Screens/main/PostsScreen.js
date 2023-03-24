@@ -2,13 +2,15 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { DefaultPostsScreen } from '../nested/DefaultPostsScreen';
 import { MapScreen } from '../nested/MapScreen';
 import { CommentsScreen } from '../nested/CommentsScreen';
-
+import { useDispatch } from 'react-redux';
 import { Pressable } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 const NestedScreen = createStackNavigator();
 
 export const PostsScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+
   return (
       <NestedScreen.Navigator
           initialRouteName="Posts"
@@ -28,7 +30,7 @@ export const PostsScreen = ({ navigation }) => {
           },
           headerLeft: false,
           headerRight: () => (
-            <Pressable style={{paddingRight: 15}}>
+            <Pressable style={{paddingRight: 15}} onPress={() => dispatch(authSingOutUser())}>
               <MaterialIcons name="logout" size={24} color="#BDBDBD" />
             </Pressable>
           ),
